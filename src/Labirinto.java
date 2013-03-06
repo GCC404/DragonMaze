@@ -1,9 +1,7 @@
 import maze.logic.*;
 
-// Gerar labirinto
-// Quadrado canto superior esquerdo
-// Aparecer A quando apanhas a espada
-
+// incluir mais dragoes
+//aguia
 
 public class Labirinto {
 

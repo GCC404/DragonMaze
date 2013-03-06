@@ -17,46 +17,70 @@ public class Hero extends Mobile {
 		switch(move) {
 		case "A":
 
+			if(x<0 || x>9 || y-1<0 || y-1>9)
+				break;
+			
 			if(maze[x][y-1]=='x')
 				break;
 
 			if(maze[x][y-1]=='E')
 				this.weild();
 
+			if(maze[x][y-1]=='S' && !this.wield)
+				break;
+			
 			y--;
+			
 
 			break;
 		case "W":
 
+			if(x-1<0 || x-1>9 || y<0 || y>9)
+				break;
+			
 			if(maze[x-1][y]=='x')
 				break;
 
 			if(maze[x-1][y]=='E')
 				this.weild();
-
+			
+			if(maze[x-1][y]=='S' && !this.wield)
+				break;
 
 			x--;
 
 			break;
 		case "D":
-
+			
+			if(x<0 || x>9 || y+1<0 || y+1>9)
+				break;
+			
 			if(maze[x][y+1]=='x')
 				break;
 
 			if(maze[x][y-1]=='E')
 				this.weild();
 
+			if(maze[x][y+1]=='S' && !this.wield)
+				break;
+			
 			y++;
 
 			break;
 		case "S":
-
+			
+			if(x+1<0 || x+1>9 || y<0 || y>9)
+				break;
+			
 			if(maze[x+1][y]=='x')
 				break;
 
 			if(maze[x+1][y]=='E')
 				this.weild();
 
+			if(maze[x+1][y]=='S' && !this.wield)
+				break;
+			
 			x++;
 
 			break;
