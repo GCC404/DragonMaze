@@ -1,5 +1,6 @@
 package maze.logic;
 
+
 public class Sword extends GameElement {
 
 	private boolean wield=false;

@@ -8,38 +8,32 @@ public class CLI {
 	
 	public static String lerInput() {
 		
-		System.out.print("Indique como pretende mover o heroi: W/A/S/D ");
+		System.out.print("Indique como pretende mover o heroi ou a aguia: (W/A/S/D) (V)");
 		return input.next();
 	}
-	
-	public static String lerInput2() { //aguia
-		
-		System.out.print("Indique como pretende mover a aguia: manter (M),  ");
-		return input.next();
-	}
-	
+
 	public static int chooseMaze() {
-		
+
 		int size;
-		
-		
+
 		System.out.print("Aleatorio (A) ou Pre-definido (P): ");
 
-		if(input.next().equals("P"))
+		if(input.next().equals("P")) 
 			return -1;
-	
+
 		System.out.println();
 		System.out.print("Insira a dimensão do labirinto: ");	
 		size = input.nextInt();
-				
 		return size;
 	}
+
 	
 	public static int chooseDragon1() {
+		
 		int numDragons=1;
 		
 		System.out.println();
-		System.out.print("Quantos dragoes pretende: ");	
+		System.out.print("Quantos dragoes pretende: [1-3]");	
 		numDragons = input.nextInt();
 		
 		return numDragons;
@@ -49,9 +43,9 @@ public class CLI {
 		
 		System.out.println();
 		System.out.print("Dragao parado (P), c/ mov. aleatoria (A), aleatorio + dormir (D): ");	
-		String choise = input.next();
+		String choice = input.next();
 		
-		switch(choise) {
+		switch(choice) {
 		case "P":
 			return 1;
 		case "A":
@@ -64,4 +58,7 @@ public class CLI {
 		return 3;
 	}
 	
+	public static void setScanner(String buffer) {
+		input=new Scanner(buffer);
+	}
 }

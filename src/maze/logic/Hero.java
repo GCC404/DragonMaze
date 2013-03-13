@@ -10,83 +10,89 @@ public class Hero extends Mobile {
 		super(x,y,'H');
 	}
 
-	public void move(char[][] maze) {
+	public void move(char[][] maze) { }
+	
+	public int move1(char[][] maze) {
 
 		String move=CLI.lerInput();
+		
+		//System.out.println("Leu: "+move);
 
 		switch(move) {
 		case "A":
 
 			if(x<0 || x>9 || y-1<0 || y-1>9)
-				break;
+				return 0;
 			
 			if(maze[x][y-1]=='x')
-				break;
+				return 0;
 
 			if(maze[x][y-1]=='E')
 				this.weild();
 
-			if(maze[x][y-1]=='S' && !this.wield)
-				break;
+			if(maze[x][y-1]=='S' && this.wield)
+				return 0;
 			
 			y--;
 			
-
-			break;
+			return 0;
 		case "W":
 
 			if(x-1<0 || x-1>9 || y<0 || y>9)
-				break;
+				return 0;
 			
 			if(maze[x-1][y]=='x')
-				break;
+				return 0;
 
 			if(maze[x-1][y]=='E')
 				this.weild();
 			
 			if(maze[x-1][y]=='S' && !this.wield)
-				break;
+				return 0;
 
 			x--;
 
-			break;
+			return 0;
 		case "D":
 			
 			if(x<0 || x>9 || y+1<0 || y+1>9)
-				break;
+				return 0;
 			
 			if(maze[x][y+1]=='x')
-				break;
+				return 0;
 
 			if(maze[x][y-1]=='E')
 				this.weild();
 
 			if(maze[x][y+1]=='S' && !this.wield)
-				break;
+				return 0;
 			
 			y++;
 
-			break;
+			return 0;
 		case "S":
 			
 			if(x+1<0 || x+1>9 || y<0 || y>9)
-				break;
+				return 0;
 			
 			if(maze[x+1][y]=='x')
-				break;
+				return 0;
 
 			if(maze[x+1][y]=='E')
 				this.weild();
 
 			if(maze[x+1][y]=='S' && !this.wield)
-				break;
-			
+				return 0;
+
 			x++;
 
-			break;
+			return 0;
 
+		case "V":
+			return 1;
+			
 		default:
-			break;
+			return 0;
 		}
 	}
 

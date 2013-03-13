@@ -1,5 +1,6 @@
 package maze.logic;
 
+
 public class Dragon extends Mobile {
 	
 	private boolean sleep=false;
@@ -29,39 +30,27 @@ public class Dragon extends Mobile {
 			switch(genMovem()) {
 
 			case "W":
-
 				if(maze[x-1][y]=='x' || maze[x-1][y]=='S')
 					break;
-
 				x--;
-
 				break;
 
 			case "A":
-
 				if(maze[x][y-1]=='x' || maze[x][y-1]=='S')
 					break;
-
 				y--;
-
 				break;
 
 			case "S":
-
 				if(maze[x+1][y]=='x' || maze[x+1][y]=='S')
 					break;
-
 				x++;
-
 				break;
 
 			case "D":
-
 				if(maze[x][y+1]=='x' || maze[x][y+1]=='S')
 					break;
-
 				y++;
-
 				break;
 
 			case "":

@@ -1,23 +1,197 @@
 package maze.logic;
 
+
 public class Eagle extends Mobile {
 	
 	private boolean move=false;
+	private boolean espada=false;
+	private boolean first=true;
+	private boolean posInicial=false;
+	private int posEspadaX;
+	private int posEspadaY;
+	private int posHeroiX;
+	private int posHeroiY;
+	private boolean noHeroi=false;
+	
 
 	public Eagle(int x, int y) {
 		super(x,y,'G');
 	}
+	
+	public void aMover() {
+		move=true;
+	}
+	
+	public boolean move() {
+		return move;
+	}
 
-	public void move(char[][] maze) { }
+	public void comEspada() {
+		espada=true;
+	}
+	
+	public boolean espada() {
+		return espada;
+	}
 
-	public void move2(char[][] maze, int x, int y) {
 
-		if(!move) {
-			this.x=x;
-			this.y=y;
-		} else { // movimentar em direcao a espada
-			
+	public void move(char[][] maze) {
+
+
+		if(this.x==posEspadaX) {
+			if(this.y==posEspadaY)
+				this.espada=true;
+			else if(this.y<posEspadaY)
+				this.y++;
+			else if(this.y>posEspadaY)
+				this.y--;
 		}
+		else if(this.y==posEspadaY) {
+
+			if(this.x==posEspadaX)
+				this.espada=true;
+			else if(this.x<posEspadaX)
+				this.x++;
+			else if(this.x>posEspadaX)
+				this.x--;
+		}
+		else {
+			if(this.x<posEspadaX)
+				this.x++;
+			if (this.y<posEspadaY)
+				this.y++;
+			if(this.x>posEspadaX)
+				this.x--;
+			if (this.y>posEspadaY)
+				this.y--;
+		}
+	}
+
+	public void move1(char[][] maze, int x1, int y1) { //movimentar com o heroi (representacao implicita)
+		this.x=x1;
+		this.y=y1;
+	}
+
+
+	public void move2(char[][] maze, int x1, int y1, int x2, int y2) {// movimentar em direcao a espada
+
+		first=false;
+
+		this.posHeroiX=x1;
+		this.posHeroiY=y1;
+		this.posEspadaX=x2;
+		this.posEspadaY=y2;
+		
+		if(this.x==posEspadaX) {
+			if(this.y==posEspadaY)
+				this.espada=true;
+			else if(this.y<posEspadaY)
+				this.y++;
+			else if(this.y>posEspadaY)
+				this.y--;
+		}
+		else if(this.y==posEspadaY) {
+			
+			if(this.x==posEspadaX)
+				this.espada=true;
+			else if(this.x<posEspadaX)
+				this.x++;
+			else if(this.x>posEspadaX)
+				this.x--;
+		}
+		else {
+			if(this.x<posEspadaX)
+				this.x++;
+			if (this.y<posEspadaY)
+				this.y++;
+			if(this.x>posEspadaX)
+				this.x--;
+			if (this.y>posEspadaY)
+				this.y--;
+		}
+	}
+
+
+	public boolean first() {
+		return first;
+	}
+
+	public void retorno(char[][] maze, int x1, int y1) {
+
+		if(!posInicial) {
+			if(this.x==posHeroiX) {
+				if(this.y==posHeroiY) {
+					posInicial=true;
+					retorno2(maze, x1, y1);
+				}
+				else if(this.y<posHeroiY)
+					this.y++;
+				else if(this.y>posHeroiY)
+					this.y++;
+			}
+			else if(this.y==posHeroiY) {
+
+				if(this.x==posHeroiX) {
+					posInicial=true;
+					retorno2(maze, x1, y1);
+				}
+				else if(this.x<posHeroiX)
+					this.x++;
+				else if(this.x>posHeroiX)
+					this.x++;
+			}
+			else {
+				if(this.x<posHeroiX)
+					this.x++;
+				if (this.y<posHeroiY)
+					this.y++;
+				if(this.x>posHeroiX)
+					this.x--;
+				if (this.y>posHeroiY)
+					this.y--;
+			}
+		} else 
+			retorno2(maze, x1, y1);
+
+	}
+
+	private void retorno2(char[][] maze, int x1, int y1) {
+		
+		if(this.x==x1) {
+			if(this.y==y1) {
+				this.move=false;
+				this.noHeroi=true;
+			}
+			else if(this.y<y1)
+				this.y++;
+			else if(this.y>y1)
+				this.y--;
+		}
+		else if(this.y==y1) {
+
+			if(this.x==x1){
+				this.move=false;
+				this.noHeroi=true;
+			}
+			else if(this.x<x1)
+				this.x++;
+			else if(this.x>x1)
+				this.x--;
+		}
+		else {
+			if(this.x<x1)
+				this.x++;
+			else if(this.x>x1)
+				this.x--;
+			if (this.y<y1)
+				this.y++;
+			else if (this.y>y1)
+				this.y--;
+		}		
+	}
+
+	public boolean noHeroi() {
+		return noHeroi;
 	}
 
 }
