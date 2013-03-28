@@ -145,7 +145,7 @@ public class Logic {
 				dragons[i].move(maze.getMaze());
 		}
 
-		System.out.println();
+		//System.out.println();
 
 		return 0;
 	}

@@ -3,18 +3,20 @@ package maze.generate;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
+
+import maze.cli.CLI;
 import maze.logic.*;
 
 public class Maze {
 	
 	private Random generator=new Random();
 	private int size=10;
-	private int []oldx=new int[3];
-	private int []oldy=new int[3];
+	private int []oldx=new int[4];
+	private int []oldy=new int[4];
+	private boolean def=true;
 	private static int []oldXdragon;
 	private static int []oldYdragon;
 	private char oldsym='T';
-	private boolean def=true;
 	private char[][] maze={ 
 			 {'x','x','x','x','x','x','x','x','x','x'},
 			 {'x',' ',' ',' ',' ',' ',' ',' ',' ','x'},
@@ -280,6 +282,8 @@ public class Maze {
 		return true;
 	}
 	
+	
+	
 	public void update(Hero hero, Dragon[] dragons, Sword sword, Eagle eagle) {
 		
 		for(int i=0; i<oldx.length-1; i++)
@@ -293,15 +297,12 @@ public class Maze {
 		
 		//System.out.println(oldx[3]+" "+oldy[3]+" "+eagle.getX()+" "+eagle.getY());
 		
-		if(!eagle.isDead()) {		
+		if(!eagle.isDead()) {
+			oldx[3]=eagle.getX();
+			oldy[3]=eagle.getY();
 			
-			if(eagle.move()) {
-				oldx[2]=eagle.getX();
-				oldy[2]=eagle.getY();
-				oldsym=maze[eagle.getX()][eagle.getY()];
+			if(eagle.move())
 				maze[eagle.getX()][eagle.getY()]=eagle.getSym();
-			}
-				
 		}
 
 		for(int i=0; i<(dragons.length-1); i++) {
@@ -332,7 +333,7 @@ public class Maze {
 			maze[hero.getX()][hero.getY()]=hero.getSym();
 		}
 		
-		System.out.println();
+		//System.out.println();
 		maze[0][0]='x';
 	}
 	
@@ -340,12 +341,7 @@ public class Maze {
 		
 		update(hero,dragons,sword, eagle);
 		
-		for(char[] line: maze) {			
-			for(char cell: line)
-				System.out.print( cell + " ");
-			
-			System.out.println();
-		}
+		CLI.printMaze(maze);
 	}
 
 	public static void atualizaDragoes(int numDragons) {
