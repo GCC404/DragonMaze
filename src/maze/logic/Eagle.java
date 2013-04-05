@@ -7,11 +7,12 @@ public class Eagle extends Mobile {
 	private boolean espada=false;
 	private boolean first=true;
 	private boolean posInicial=false;
+
 	private int posEspadaX;
 	private int posEspadaY;
 	private int posHeroiX;
 	private int posHeroiY;
-	private boolean noHeroi=false;
+	
 	
 
 	public Eagle(int x, int y) {
@@ -37,20 +38,18 @@ public class Eagle extends Mobile {
 
 	public void move(char[][] maze) {
 
-
 		if(this.x==posEspadaX) {
-			if(this.y==posEspadaY)
+			if(this.y==posEspadaY) {
 				this.espada=true;
+				System.out.println("etsou aqui");
+			}
 			else if(this.y<posEspadaY)
 				this.y++;
 			else if(this.y>posEspadaY)
 				this.y--;
 		}
 		else if(this.y==posEspadaY) {
-
-			if(this.x==posEspadaX)
-				this.espada=true;
-			else if(this.x<posEspadaX)
+			if(this.x<posEspadaX)
 				this.x++;
 			else if(this.x>posEspadaX)
 				this.x--;
@@ -58,20 +57,20 @@ public class Eagle extends Mobile {
 		else {
 			if(this.x<posEspadaX)
 				this.x++;
+			else if(this.x>posEspadaX)
+				this.x--;
 			if (this.y<posEspadaY)
 				this.y++;
-			if(this.x>posEspadaX)
-				this.x--;
-			if (this.y>posEspadaY)
+			else if (this.y>posEspadaY)
 				this.y--;
 		}
 	}
+	
 
 	public void move1(char[][] maze, int x1, int y1) { //movimentar com o heroi (representacao implicita)
 		this.x=x1;
 		this.y=y1;
 	}
-
 
 	public void move2(char[][] maze, int x1, int y1, int x2, int y2) {// movimentar em direcao a espada
 
@@ -91,10 +90,7 @@ public class Eagle extends Mobile {
 				this.y--;
 		}
 		else if(this.y==posEspadaY) {
-			
-			if(this.x==posEspadaX)
-				this.espada=true;
-			else if(this.x<posEspadaX)
+			if(this.x<posEspadaX)
 				this.x++;
 			else if(this.x>posEspadaX)
 				this.x--;
@@ -102,11 +98,11 @@ public class Eagle extends Mobile {
 		else {
 			if(this.x<posEspadaX)
 				this.x++;
+			else if(this.x>posEspadaX)
+				this.x--;
 			if (this.y<posEspadaY)
 				this.y++;
-			if(this.x>posEspadaX)
-				this.x--;
-			if (this.y>posEspadaY)
+			else if (this.y>posEspadaY)
 				this.y--;
 		}
 	}
@@ -127,27 +123,22 @@ public class Eagle extends Mobile {
 				else if(this.y<posHeroiY)
 					this.y++;
 				else if(this.y>posHeroiY)
-					this.y++;
+					this.y--;
 			}
 			else if(this.y==posHeroiY) {
-
-				if(this.x==posHeroiX) {
-					posInicial=true;
-					retorno2(maze, x1, y1);
-				}
-				else if(this.x<posHeroiX)
+				if(this.x<posHeroiX)
 					this.x++;
 				else if(this.x>posHeroiX)
-					this.x++;
+					this.x--;
 			}
 			else {
 				if(this.x<posHeroiX)
 					this.x++;
+				else if(this.x>posHeroiX)
+					this.x--;
 				if (this.y<posHeroiY)
 					this.y++;
-				if(this.x>posHeroiX)
-					this.x--;
-				if (this.y>posHeroiY)
+				else if (this.y>posHeroiY)
 					this.y--;
 			}
 		} else 
@@ -160,7 +151,7 @@ public class Eagle extends Mobile {
 		if(this.x==x1) {
 			if(this.y==y1) {
 				this.move=false;
-				this.noHeroi=true;
+				this.dead=true;
 			}
 			else if(this.y<y1)
 				this.y++;
@@ -168,12 +159,7 @@ public class Eagle extends Mobile {
 				this.y--;
 		}
 		else if(this.y==y1) {
-
-			if(this.x==x1){
-				this.move=false;
-				this.noHeroi=true;
-			}
-			else if(this.x<x1)
+			if(this.x<x1)
 				this.x++;
 			else if(this.x>x1)
 				this.x--;
@@ -190,8 +176,7 @@ public class Eagle extends Mobile {
 		}		
 	}
 
-	public boolean noHeroi() {
-		return noHeroi;
+	public boolean posInicial() {
+		return posInicial;
 	}
-
 }

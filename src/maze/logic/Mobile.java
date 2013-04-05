@@ -11,8 +11,6 @@ public abstract class Mobile extends GameElement {
 		super(x,y,sym);
 	}
 	
-	abstract void move(char [][]maze);
-	
 	public void kill() {
 		dead=true;
 	}

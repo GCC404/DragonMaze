@@ -14,7 +14,7 @@ public class Logic {
 	private Maze maze;
 	private Dragon[] dragons;
 	private Eagle eagle;
-	private int numDragons;
+	private int numDragons=1;
 	
 
 	public char[][] getMaze() {
@@ -25,17 +25,18 @@ public class Logic {
 	public Logic() {
 		maze=new Maze(CLI.chooseMaze());
 		int num=CLI.chooseDragon2();
-		numDragons=CLI.chooseDragon1();
-		dragons=new Dragon[numDragons+1];
 		
 		int []x=new int[2];	
 		
 		if(!maze.isDefault()) {
 				
-			pickEmptyPos(x);
+			numDragons=CLI.chooseDragon1();
+			dragons=new Dragon[numDragons+1];
+			
+			pickEmptyPos(x, 0);
 			dragons[0]=new Dragon(x[0],x[1],num);
 
-			for(int i=1; i<dragons.length-1; i++) {
+			for(int i=1; i<dragons.length; i++) {
 				pickEmptyPos(x, i);
 				dragons[i]=new Dragon(x[0],x[1],num);
 			}
@@ -49,15 +50,8 @@ public class Logic {
 			hero=new Hero(x[0],x[1]);
 			
 		} else {
+			dragons=new Dragon[numDragons+1];
 			dragons[0]=new Dragon(3,1,num);
-			for(int i=1; i<numDragons-1; i++) {
-				if(i==1)
-					dragons[i]=new Dragon(2,8,num);
-				else if(i==2) {
-					System.out.println("aqui");
-					dragons[i]=new Dragon(8,5,num);
-				}
-			}
 			sword=new Sword(8,1);
 			hero=new Hero(1,1);
 		}
@@ -82,17 +76,6 @@ public class Logic {
 				pickEmptyPos(x, i);
 		}
 	}
-	
-	private void pickEmptyPos(int x[]) {
-		int max=maze.getSize();
-		char[][] auxmaze=maze.getMaze();
-
-		do {
-			x[0]=gerador.nextInt(max);
-			x[1]=gerador.nextInt(max);
-		} while (auxmaze[x[0]][x[1]]!=' ');		
-
-	}
 
 	//Ganhou 1
 	//Perdeu -1
@@ -103,13 +86,14 @@ public class Logic {
 		int ret;
 		
 		if(!hero.isDead())
-			ret=hero.move1(maze.getMaze());
+			ret=hero.move(maze.getMaze(), countDragons());
 		else return -1;		
 		
-		if(ret==1 && !eagle.isDead()) {
+		if(ret==1 && !eagle.isDead())
 			eagle.aMover();
-		}
-		
+		else if(ret==2)
+			return 1;
+				
 		if(!eagle.isDead()) {
 			if(!eagle.move() && !eagle.espada())
 				eagle.move1(maze.getMaze(), hero.getX(), hero.getY());
@@ -124,30 +108,28 @@ public class Logic {
 				eagle.retorno(maze.getMaze(), hero.getX(), hero.getY());
 			}
 		}
-
-		if(eagle.espada() && eagle.noHeroi())
-			hero.weild();
-
-		int count=0;
-		for(int i=0; i<numDragons; i++) {
-			if(maze.getMaze()[hero.getX()][hero.getY()]=='S' && dragons[i].isDead() && hero.isWield())
-				count++;
-		}
-		if(count==numDragons) {
-			return 1;
-		}
 		
+		if(eagle.espada() && eagle.getX()==hero.getX() && eagle.getY()==hero.getY()) {
+			hero.weild();
+			eagle.kill();
+		}
 
-		//checkCollision();
-
-		for(int i=0; i<numDragons-1; i++) {
+		for(int i=0; i<numDragons; i++) {
 			if(!dragons[i].isDead())
 				dragons[i].move(maze.getMaze());
 		}
 
-		//System.out.println();
-
 		return 0;
+	}
+
+	private boolean countDragons() {
+
+		int count=0;
+		for(int i=0; i<numDragons; i++)
+			if(dragons[i].isDead())
+				count++;
+
+		return (count==numDragons);
 	}
 
 	public void printConsole() {
@@ -156,35 +138,41 @@ public class Logic {
 
 	private void checkCollision() {		
 
-		for(int i=0; i<numDragons-1; i++) {
-			if(hero.getX()==dragons[i].getX())
-				if(hero.getY()-dragons[i].getY()<2 && hero.getY()-dragons[i].getY()>-2)
-					if(hero.isWield())
-						dragons[i].kill();
-					else if(!dragons[i].isAsleep())
-						hero.kill();
+		for(int i=0; i<numDragons; i++) {
+			if(!dragons[i].isDead()) {
+				if(hero.getX()==dragons[i].getX())
+					if(hero.getY()-dragons[i].getY()<2 && hero.getY()-dragons[i].getY()>-2)
+						if(hero.isWield())
+							dragons[i].kill();
+						else if(!dragons[i].isAsleep())
+							hero.kill();
 
-			if(hero.getY()==dragons[i].getY())		
-				if(hero.getX()-dragons[i].getX()<2 && hero.getX()-dragons[i].getX()>-2)
-					if(hero.isWield())
-						dragons[i].kill();
-					else if(!dragons[i].isAsleep())
-						hero.kill();
+				if(hero.getY()==dragons[i].getY())		
+					if(hero.getX()-dragons[i].getX()<2 && hero.getX()-dragons[i].getX()>-2)
+						if(hero.isWield())
+							dragons[i].kill();
+						else if(!dragons[i].isAsleep())
+							hero.kill();
 
-
-			if(hero.getX()==sword.getX() && hero.getY()==sword.getY()) {
-				hero.weild();
-				sword.wield();
+				if(!eagle.isDead()) {
+					if(eagle.getX()==dragons[i].getX()) {
+						if(eagle.getY()-dragons[i].getY()<2 && eagle.getY()-dragons[i].getY()>-2
+								&& !dragons[i].isAsleep() && eagle.posInicial())
+							eagle.kill();
+					}
+					else if(eagle.getY()==dragons[i].getY()) {	
+						if(eagle.getX()-dragons[i].getX()<2 && eagle.getX()-dragons[i].getX()>-2
+								&& !dragons[i].isAsleep() && eagle.posInicial())
+							eagle.kill();
+					}
+				}
 			}
-
-			if(eagle.getX()==dragons[i].getX()) {
-				if(eagle.getY()-dragons[i].getY()<2 && eagle.getY()-dragons[i].getY()>-2 && !dragons[i].isAsleep() && !eagle.espada())
-					eagle.kill();
-			}
-			else if(eagle.getY()==dragons[i].getY()) {		
-				if(eagle.getX()-dragons[i].getX()<2 && eagle.getX()-dragons[i].getX()>-2 && !dragons[i].isAsleep() && !eagle.espada())
-					eagle.kill();
-			}
+		}
+		
+		if(hero.getX()==sword.getX() && hero.getY()==sword.getY()) {
+			hero.weild();
+			sword.wield();
+			eagle.kill();
 		}
 	}
 
