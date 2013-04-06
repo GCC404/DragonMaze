@@ -282,8 +282,6 @@ public class Maze {
 		return true;
 	}
 	
-	
-	
 	public void update(Hero hero, Dragon[] dragons, Sword sword, Eagle eagle) {
 		
 		for(int i=0; i<oldx.length-1; i++)
@@ -295,19 +293,16 @@ public class Maze {
 		if(oldsym!='T')
 			maze[oldx[2]][oldy[2]]=oldsym;
 		
-		//System.out.println(oldx[3]+" "+oldy[3]+" "+eagle.getX()+" "+eagle.getY());
-		
 		if(!eagle.isDead()) {
-			oldx[3]=eagle.getX();
-			oldy[3]=eagle.getY();
+			oldx[2]=eagle.getX();
+			oldy[2]=eagle.getY();
+			oldsym=maze[eagle.getX()][eagle.getY()];
 			
 			if(eagle.move())
 				maze[eagle.getX()][eagle.getY()]=eagle.getSym();
 		}
 
 		for(int i=0; i<(dragons.length-1); i++) {
-			
-			//System.out.println(oldXdragon[i] + "," + oldYdragon[i]);
 			
 			if(!dragons[i].isDead()) {
 				if(sword.getX()==dragons[i].getX() && sword.getX()==dragons[i].getX())
@@ -318,7 +313,6 @@ public class Maze {
 				oldYdragon[i]=dragons[i].getY();
 			}
 		}
-
 
 		if(!sword.isWield()) {
 			oldx[1]=sword.getX();
@@ -332,8 +326,6 @@ public class Maze {
 			
 			maze[hero.getX()][hero.getY()]=hero.getSym();
 		}
-		
-		//System.out.println();
 		maze[0][0]='x';
 	}
 	

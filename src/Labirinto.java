@@ -8,7 +8,7 @@ public class Labirinto {
 	/**
 	 * @param args
 	 */
-	public static void mainsa(String[] args) {
+	public static void main(String[] args) {
 
 		Logic game1 = new Logic();
 		game1.play();
