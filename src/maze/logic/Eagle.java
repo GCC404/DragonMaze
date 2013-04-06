@@ -39,10 +39,8 @@ public class Eagle extends Mobile {
 	public void move(char[][] maze) {
 
 		if(this.x==posEspadaX) {
-			if(this.y==posEspadaY) {
+			if(this.y==posEspadaY)
 				this.espada=true;
-				System.out.println("etsou aqui");
-			}
 			else if(this.y<posEspadaY)
 				this.y++;
 			else if(this.y>posEspadaY)
@@ -82,8 +80,13 @@ public class Eagle extends Mobile {
 		this.posEspadaY=y2;
 		
 		if(this.x==posEspadaX) {
-			if(this.y==posEspadaY)
+			if(this.y==posEspadaY) {
 				this.espada=true;
+				if(maze[posEspadaX][posEspadaY]=='E' ||	maze[posEspadaX-1][posEspadaY]=='D'
+						 || maze[posEspadaX][posEspadaY-1]=='D' || maze[posEspadaX+1][posEspadaY]=='D'
+								 || maze[posEspadaX][posEspadaY+1]=='D')
+					this.dead=true; //aguia "morre" se espada ja nao estiver la e morrer quando o dragao esta la
+			}
 			else if(this.y<posEspadaY)
 				this.y++;
 			else if(this.y>posEspadaY)
