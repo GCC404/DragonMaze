@@ -1,5 +1,6 @@
 package maze.generate;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
@@ -7,7 +8,7 @@ import java.util.Stack;
 import maze.cli.CLI;
 import maze.logic.*;
 
-public class Maze {
+public class Maze implements Serializable {
 	
 	private Random generator=new Random();
 	private int size=10;

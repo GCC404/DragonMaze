@@ -1,5 +1,7 @@
 package maze.logic;
 
+import maze.generate.Generator;
+
 
 public class Dragon extends Mobile {
 	
@@ -14,7 +16,7 @@ public class Dragon extends Mobile {
 	public void move(char[][] maze) {
 
 		if(this.mode==3) {
-			if(generator.nextInt(6)==0)
+			if(Generator.nextInt(6)==0)
 				sleep=!sleep;
 
 			if(sleep) {
@@ -61,7 +63,7 @@ public class Dragon extends Mobile {
 
 	private String genMovem() {
 
-		int a = generator.nextInt(5);
+		int a = Generator.nextInt(5);
 
 		switch(a) {
 		case 0:

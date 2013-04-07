@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class ShowMaze extends JPanel {
-	private BufferedImage wall, dragon, sword, dragonasleep, hero, herosword, exit;
+	private BufferedImage wall, dragon, sword, dragonasleep, hero, herosword, exit, eagle;
 	private char[][] maze={ 
 			 {'x','x','x','x','x','x','x','x','x','x'},
 			 {'x',' ',' ',' ',' ',' ',' ',' ',' ','x'},
@@ -26,13 +26,14 @@ public class ShowMaze extends JPanel {
 
 	public ShowMaze(char[][] maze) {
 		try {                
-			wall = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\wall.jpg"));
-			dragon = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\dragao.png"));
-			sword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\sword.jpg"));
-			dragonasleep = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\dragaosleep.png"));
-			hero = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\hero.jpg"));
-			herosword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\herosword.gif"));
-			exit = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\ProjetoGuiado\\exit.jpg"));
+			wall = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\wall.jpg"));
+			dragon = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragao.png"));
+			sword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\sword.jpg"));
+			dragonasleep = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragaosleep.png"));
+			hero = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\hero.jpg"));
+			herosword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\herosword.gif"));
+			exit = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\exit.jpg"));
+			eagle = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\eagle.png"));
 		} catch (IOException ex) {
 			// handle exception...
 		}
@@ -74,6 +75,9 @@ public class ShowMaze extends JPanel {
 					break;
 				case 'A':
 					g.drawImage(herosword, x*size, y*size, size, size, null);
+					break;
+				case 'G':
+					g.drawImage(eagle, x*size, y*size, size, size, null);
 					break;
 				}
 			}

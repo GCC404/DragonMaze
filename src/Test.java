@@ -189,14 +189,17 @@ public class Test {
 
 		game1.makePlay();
 		maze=game1.getMaze();
+		
+
 		assertSame(maze[4][1],'D');
-
 		game1.makePlay();
 		maze=game1.getMaze();
+		
 		assertSame(maze[5][1],'D');
-
 		game1.makePlay();
 		maze=game1.getMaze();
+		
+
 		assertSame(maze[5][2],'D');
 	}
 }

@@ -1,12 +1,13 @@
 package maze.logic;
 
 
+import java.io.Serializable;
 import java.util.Random;
 
 import maze.generate.Maze;
 import maze.cli.*;
 
-public class Logic {
+public class Logic implements Serializable {
 
 	private Random gerador= new Random();
 	private Hero hero;
@@ -88,6 +89,8 @@ public class Logic {
 		if(!hero.isDead())
 			ret=hero.move(maze.getMaze(), countDragons());
 		else return -1;		
+		if(hero.isDead())
+			return -1;
 		
 		if(ret==1 && !eagle.isDead())
 			eagle.aMover();

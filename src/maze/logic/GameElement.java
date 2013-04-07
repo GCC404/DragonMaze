@@ -1,6 +1,8 @@
 package maze.logic;
 
-public class GameElement {
+import java.io.Serializable;
+
+public class GameElement  implements Serializable {
 	protected int x, y;
 	protected char sym;
 	
