@@ -3,7 +3,7 @@ package maze.generate;
 import java.util.Random;
 
 public class Generator {
-	private static int []test;
+	private static int []test=new int[0];
 	private static int i;
 	private static Random generator=new Random();
 	

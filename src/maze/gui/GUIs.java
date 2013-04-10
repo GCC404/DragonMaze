@@ -24,14 +24,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class GUIs extends JFrame {
 
 	private JPanel contentPane;
 	private Logic game;
+	private MakeMaze makemaze=new MakeMaze();
 	private ShowMaze gamepanel;
 	private GameOptions optionwindow=new GameOptions();
 	private Won wonwindow=new Won();
@@ -65,7 +64,7 @@ public class GUIs extends JFrame {
 
 		setTitle("Dungeons & Dragons");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 585);
+		setBounds(100, 100, 531, 620);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,7 +77,12 @@ public class GUIs extends JFrame {
 				if(JOptionPane.showConfirmDialog(null, "Are you sure?")==0) {
 					gameoptions=optionwindow.getOptions();
 					CLI.setScanner(gameoptions);
-					game=new Logic();
+					
+					if(makemaze.getHero().getY()==-1)
+						game=new Logic();
+					else game=new Logic(makemaze.getMaze(),makemaze.getHero(),makemaze.getSword(),makemaze.getDragons(),3);
+					
+					makemaze.reset();
 					gamepanel.updateStatus(game.getMaze());
 				}
 			}
@@ -96,7 +100,7 @@ public class GUIs extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(416, 521, 89, 23);
+		btnExit.setBounds(416, 521, 89, 49);
 		contentPane.add(btnExit);
 
 
@@ -108,21 +112,21 @@ public class GUIs extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				char c=e.getKeyChar();
-				System.out.print(c);
+
 				if(c!='\n' && c!=' ') {
 					String input=String.valueOf(c).toUpperCase();
 					/*
-					System.out.println(input+"W");
-					System.out.println(input!="W");
-					System.out.println(input!="W" && input!="A" && input!="S" && input!="D");
+				System.out.println(input+"W");
+				System.out.println(input!="W");
+				System.out.println(input!="W" && input!="A" && input!="S" && input!="D");
 
-					if(input!="W" && input!="A" && input!="S" && input!="D")
-						return;
+				if(input!="W" && input!="A" && input!="S" && input!="D")
+					return;
 					 */
 					CLI.setScanner(input);
 				}
 				int response=game.makePlay();
-
+				
 				if(response==1) {
 					wonwindow.won(true);
 					wonwindow.setVisible(true);
@@ -176,7 +180,8 @@ public class GUIs extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
+				
+				gamepanel.requestFocusInWindow();
 			}
 		});
 		btnSaveGame.setBounds(194, 521, 101, 23);
@@ -207,10 +212,19 @@ public class GUIs extends JFrame {
 				}
 
 				gamepanel.updateStatus(game.getMaze());
+				gamepanel.requestFocusInWindow();
 			}
 		});
 		btnLoadGame.setBounds(294, 521, 101, 23);
 		contentPane.add(btnLoadGame);
+		
+		JButton btnMakeMaze = new JButton("Make Maze");
+		btnMakeMaze.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				makemaze.setVisible(true);
+			}
+		});
+		btnMakeMaze.setBounds(10, 547, 385, 23);
+		contentPane.add(btnMakeMaze);
 	}
 }
-

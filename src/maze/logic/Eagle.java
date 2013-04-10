@@ -1,7 +1,10 @@
 package maze.logic;
 
+import java.io.Serializable;
 
-public class Eagle extends Mobile {
+
+@SuppressWarnings("serial")
+public class Eagle extends Mobile implements Serializable {
 	
 	private boolean move=false;
 	private boolean sword=false;

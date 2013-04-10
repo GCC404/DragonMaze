@@ -40,7 +40,7 @@ public class ShowMaze extends JPanel {
 
 		if(maze!=null)
 			this.maze=maze;
-
+		
 		repaint();
 	}
 
@@ -81,9 +81,9 @@ public class ShowMaze extends JPanel {
 					break;
 				}
 			}
-
+		
 	}
-
+	
 	public void updateStatus(char[][] maze) {
 		this.maze=maze;
 		repaint();

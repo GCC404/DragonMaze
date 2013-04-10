@@ -327,7 +327,7 @@ public class Maze {
 				maze[eagle.getX()][eagle.getY()]=eagle.getSym();
 		}
 
-		for(int i=0; i<(dragons.length-1); i++) {
+		for(int i=0; i<dragons.length; i++) {
 			
 			if(!dragons[i].getDead()) {
 				if(sword.getX()==dragons[i].getX() && sword.getX()==dragons[i].getX())

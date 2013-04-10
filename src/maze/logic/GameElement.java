@@ -2,6 +2,7 @@ package maze.logic;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class GameElement implements Serializable {
 	protected int x, y;
 	protected char sym;

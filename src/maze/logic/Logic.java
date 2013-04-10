@@ -7,7 +7,8 @@ import java.util.Random;
 import maze.generate.Maze;
 import maze.cli.*;
 
-public class Logic implements Serializable{
+@SuppressWarnings("serial")
+public class Logic implements Serializable {
 
 	private Random gerador= new Random();
 	private Hero hero;
@@ -34,20 +35,22 @@ public class Logic implements Serializable{
 	 * @param posDragons
 	 * @param mode-dragon mode
 	 */
-	public Logic(Maze maze, Hero hero, Sword sword, ArrayList<Integer> posDragons, int mode) {
-		
+    public Logic(Maze maze, Hero hero, Sword sword, ArrayList<Integer> posDragons, int mode) {
 		this.hero=hero;
-		dragons=new Dragon[(posDragons.size()/2)+1];
-		for(int i=0; i<posDragons.size(); i++) {
-			int x=posDragons.get(i);
-			i++;
-			int y=posDragons.get(i);
-			dragons[i-1]=new Dragon(x, y, mode);
+        
+		dragons=new Dragon[posDragons.size()/2];
+		for(int i=0; i<posDragons.size(); i+=2) {
+			System.out.println("criou em "+i/2);
+			dragons[i/2]=new Dragon(posDragons.get(i), posDragons.get(i+1), mode);
 		}
+		Maze.updateDragons(posDragons.size()/2+1);
+        
 		this.sword=sword;
-		this.eagle=new Eagle(hero.getX(), hero.getY());
 		this.maze=maze;
+		this.eagle=new Eagle(hero.getX(), hero.getY());
+		numDragons=posDragons.size()/2;
 	}
+	
 	
 	/**
 	 * Logic constructor
@@ -61,7 +64,7 @@ public class Logic implements Serializable{
 		if(!maze.isDefault()) {
 				
 			numDragons=CLI.chooseNumDragons();
-			dragons=new Dragon[numDragons+1];
+			dragons=new Dragon[numDragons];
 			
 			pickEmptyPos(x, 0);
 			dragons[0]=new Dragon(x[0],x[1],num);
@@ -80,7 +83,7 @@ public class Logic implements Serializable{
 			hero=new Hero(x[0],x[1]);
 			
 		} else {
-			dragons=new Dragon[numDragons+1];
+			dragons=new Dragon[numDragons];
 			dragons[0]=new Dragon(3,1,num);
 			sword=new Sword(8,1);
 			hero=new Hero(1,1);

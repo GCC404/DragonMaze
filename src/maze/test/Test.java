@@ -2,6 +2,7 @@ package maze.test;
 import static org.junit.Assert.*;
 import maze.logic.*;
 import maze.cli.*;
+import maze.generate.Generator;
 
 public class Test {
 

@@ -1,7 +1,10 @@
 package maze.logic;
 
+import java.io.Serializable;
 
-public class Sword extends GameElement {
+
+@SuppressWarnings("serial")
+public class Sword extends GameElement implements Serializable {
 
 	private boolean wield=false;
 	
@@ -15,14 +18,14 @@ public class Sword extends GameElement {
 	}
 	
 	/**
-	 * Set weild to true
+	 * Set wield to true
 	 */
 	public void setWield() {
 		wield=true;
 	}
 	
 	/**
-	 * @return weild
+	 * @return wield
 	 */
 	public boolean getWield() {
 		return wield;

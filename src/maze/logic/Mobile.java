@@ -2,6 +2,7 @@ package maze.logic;
 
 import java.util.Random;
 
+@SuppressWarnings("serial")
 public abstract class Mobile extends GameElement {
 	
 	protected Random generator=new Random();

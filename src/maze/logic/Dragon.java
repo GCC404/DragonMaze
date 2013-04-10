@@ -1,8 +1,11 @@
 package maze.logic;
 
+import java.io.Serializable;
+
 import maze.generate.Generator;
 
-public class Dragon extends Mobile {
+@SuppressWarnings("serial")
+public class Dragon extends Mobile implements Serializable {
 	
 	private boolean sleep=false;
 	private int mode=3;

@@ -1,13 +1,16 @@
 package maze.logic;
 
+import java.io.Serializable;
+
 import maze.cli.CLI;
 
-public class Hero extends Mobile {
+@SuppressWarnings("serial")
+public class Hero extends Mobile implements Serializable {
 
 	private boolean wield=false;
 
 	/**
-	 * Heor constructor
+	 * Hero constructor
 	 * @param x
 	 * @param y
 	 */
