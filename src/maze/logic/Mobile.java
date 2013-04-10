@@ -7,15 +7,27 @@ public abstract class Mobile extends GameElement {
 	protected Random generator=new Random();
 	protected boolean dead=false;
 	
+	/**
+	 * Mobile constructor
+	 * @param x
+	 * @param y
+	 * @param sym
+	 */
 	protected Mobile(int x, int y, char sym) {
 		super(x,y,sym);
 	}
 	
+	/**
+	 * Set kill to true
+	 */
 	public void kill() {
 		dead=true;
 	}
 	
-	public boolean isDead() {
+	/**
+	 * @return dead
+	 */
+	public boolean getDead() {
 		return dead;
 	}
 }

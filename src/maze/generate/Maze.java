@@ -1,6 +1,5 @@
 package maze.generate;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
@@ -8,7 +7,7 @@ import java.util.Stack;
 import maze.cli.CLI;
 import maze.logic.*;
 
-public class Maze implements Serializable {
+public class Maze {
 	
 	private Random generator=new Random();
 	private int size=10;
@@ -30,7 +29,10 @@ public class Maze implements Serializable {
 			 {'x',' ','x','x',' ',' ',' ',' ',' ','x'},
 			 {'x','x','x','x','x','x','x','x','x','x'},};
 	
-	
+	/**
+	 * Maze constructor
+	 * @param ssize-size of maze
+	 */
 	public Maze(int ssize) {
 		
 		if(ssize==-1)
@@ -42,18 +44,39 @@ public class Maze implements Serializable {
 		maze=geraLab();
 	}
 	
+	/**
+	 * Maze constructor
+	 * @param maze
+	 */
+	public Maze(char[][] maze) {
+		this.maze=maze;
+	}
+	
+	/**
+	 * @return def
+	 */
 	public boolean isDefault() {
 		return def;
 	}
 	
+	/**
+	 * @return maze
+	 */
 	public char[][] getMaze() {
 		return maze;
 	}
 	
+	/**
+	 * @return size
+	 */
 	public int getSize() {
 		return size;
 	}
 
+	/**
+	 * Create new maze
+	 * @return maze generated
+	 */
 	private char[][] geraLab() {
 		
 		char[][] maze= new char[size][size];
@@ -142,34 +165,18 @@ public class Maze implements Serializable {
 				y3=(Integer)sy.pop();
 
 				i=0;
-			}
-			
+			}	
 		}
-
-
-		/*
-		do {
-			x3=generator.nextInt(size-1);
-			y3=generator.nextInt(size-1);
-		} while(maze[x3][y3]!=' ');
-
-		maze[x3][y3]='E';
-
-		do {
-			x3=generator.nextInt(size-1);
-			y3=generator.nextInt(size-1);
-		} while(maze[x3][y3]!=' ');
-		maze[x3][y3]='H';
-
-		do {
-			x3=generator.nextInt(size-1);
-			y3=generator.nextInt(size-1);
-		} while(maze[x3][y3]!=' ');
-			maze[x3][y3]='D';*/
-
 		return maze;
 	}
 
+	/**
+	 * TODO
+	 * @param x
+	 * @param y
+	 * @param maze
+	 * @return
+	 */
 	private int[] pickNew(int x, int y, char[][]maze) {
 
 		int[] res=new int[2];
@@ -252,6 +259,11 @@ public class Maze implements Serializable {
 
 	}
 
+	/**
+	 * TODO
+	 * @param maze
+	 * @return
+	 */
 	private static boolean checkValid(char[][] maze) {
 
 		for(int y=0; y<maze[0].length; y++)
@@ -271,6 +283,11 @@ public class Maze implements Serializable {
 		return true;
 	}
 
+	/**
+	 * TODO
+	 * @param maze
+	 * @return
+	 */
 	private static boolean checkStop(char[][] maze) {
 
 		for(int x=0; x<maze.length-2; x++)
@@ -283,6 +300,13 @@ public class Maze implements Serializable {
 		return true;
 	}
 	
+	/**
+	 * Update maze
+	 * @param hero
+	 * @param dragons
+	 * @param sword
+	 * @param eagle
+	 */
 	public void update(Hero hero, Dragon[] dragons, Sword sword, Eagle eagle) {
 		
 		for(int i=0; i<oldx.length-1; i++)
@@ -294,18 +318,18 @@ public class Maze implements Serializable {
 		if(oldsym!='T')
 			maze[oldx[2]][oldy[2]]=oldsym;
 		
-		if(!eagle.isDead()) {
+		if(!eagle.getDead()) {
 			oldx[2]=eagle.getX();
 			oldy[2]=eagle.getY();
 			oldsym=maze[eagle.getX()][eagle.getY()];
 			
-			if(eagle.move())
+			if(eagle.getMove())
 				maze[eagle.getX()][eagle.getY()]=eagle.getSym();
 		}
 
 		for(int i=0; i<(dragons.length-1); i++) {
 			
-			if(!dragons[i].isDead()) {
+			if(!dragons[i].getDead()) {
 				if(sword.getX()==dragons[i].getX() && sword.getX()==dragons[i].getX())
 					maze[sword.getX()][sword.getY()]='F';
 				else maze[dragons[i].getX()][dragons[i].getY()]=dragons[i].getSym();
@@ -315,13 +339,13 @@ public class Maze implements Serializable {
 			}
 		}
 
-		if(!sword.isWield()) {
+		if(!sword.getWield()) {
 			oldx[1]=sword.getX();
 			oldy[1]=sword.getY();
 			maze[sword.getX()][sword.getY()]=sword.getSym();
 		}
 
-		if(!hero.isDead()) {
+		if(!hero.getDead()) {
 			oldx[0]=hero.getX();
 			oldy[0]=hero.getY();
 			
@@ -329,7 +353,14 @@ public class Maze implements Serializable {
 		}
 		maze[0][0]='x';
 	}
-	
+
+	/**
+	 * Print maze
+	 * @param hero
+	 * @param dragons
+	 * @param sword
+	 * @param eagle
+	 */
 	public void printConsole(Hero hero, Dragon[] dragons, Sword sword, Eagle eagle) {
 		
 		update(hero,dragons,sword, eagle);
@@ -337,7 +368,11 @@ public class Maze implements Serializable {
 		CLI.printMaze(maze);
 	}
 
-	public static void atualizaDragoes(int numDragons) {
+	/**
+	 * Update oldXdragon and oldYdragon
+	 * @param numDragons
+	 */
+	public static void updateDragons(int numDragons) {
 		oldXdragon=new int[numDragons+1];
 		oldYdragon=new int[numDragons+1];
 	}

@@ -7,11 +7,20 @@ public class Generator {
 	private static int i;
 	private static Random generator=new Random();
 	
+	/**
+	 * TODO
+	 * @param ttest
+	 */
 	public static void setTest(int [] ttest) {
 		test=ttest;
 		i=0;
 	}
 	
+	/**
+	 * TODO
+	 * @param limit
+	 * @return
+	 */
 	public static int nextInt(int limit) {
 		if(test.length==0)
 			return generator.nextInt(limit);

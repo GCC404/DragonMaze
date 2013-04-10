@@ -112,17 +112,17 @@ public class GUIs extends JFrame {
 				if(c!='\n' && c!=' ') {
 					String input=String.valueOf(c).toUpperCase();
 					/*
-				System.out.println(input+"W");
-				System.out.println(input!="W");
-				System.out.println(input!="W" && input!="A" && input!="S" && input!="D");
+					System.out.println(input+"W");
+					System.out.println(input!="W");
+					System.out.println(input!="W" && input!="A" && input!="S" && input!="D");
 
-				if(input!="W" && input!="A" && input!="S" && input!="D")
-					return;
+					if(input!="W" && input!="A" && input!="S" && input!="D")
+						return;
 					 */
 					CLI.setScanner(input);
 				}
 				int response=game.makePlay();
-				
+
 				if(response==1) {
 					wonwindow.won(true);
 					wonwindow.setVisible(true);
@@ -176,7 +176,7 @@ public class GUIs extends JFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
+
 			}
 		});
 		btnSaveGame.setBounds(194, 521, 101, 23);
@@ -213,3 +213,4 @@ public class GUIs extends JFrame {
 		contentPane.add(btnLoadGame);
 	}
 }
+

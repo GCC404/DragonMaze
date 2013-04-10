@@ -5,15 +5,26 @@ public class Sword extends GameElement {
 
 	private boolean wield=false;
 	
+	/**
+	 * Sword constructor
+	 * @param x
+	 * @param y
+	 */
 	public Sword(int x, int y) {
 		super(x,y,'E');
 	}
 	
-	public void wield() {
+	/**
+	 * Set weild to true
+	 */
+	public void setWield() {
 		wield=true;
 	}
 	
-	public boolean isWield() {
+	/**
+	 * @return weild
+	 */
+	public boolean getWield() {
 		return wield;
 	}
 }

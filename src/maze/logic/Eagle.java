@@ -4,152 +4,204 @@ package maze.logic;
 public class Eagle extends Mobile {
 	
 	private boolean move=false;
-	private boolean espada=false;
+	private boolean sword=false;
 	private boolean first=true;
-	private boolean posInicial=false;
+	private boolean initialPos=false;
 
-	private int posEspadaX;
-	private int posEspadaY;
-	private int posHeroiX;
-	private int posHeroiY;
+	private int swordX;
+	private int swordY;
+	private int heroX;
+	private int heroY;
 	
-	
-
+	/**
+	 * Eagle constructor
+	 * @param x
+	 * @param y
+	 */
 	public Eagle(int x, int y) {
 		super(x,y,'G');
 	}
 	
-	public void aMover() {
-		move=true;
-	}
-	
-	public boolean move() {
+	/**
+	 * @return move
+	 */
+	public boolean getMove() {
 		return move;
 	}
 
-	public void comEspada() {
-		espada=true;
+	/**
+	 * Set move to true
+	 */
+	public void setMove() {
+		move=true;
 	}
 	
-	public boolean espada() {
-		return espada;
-	}
-
-
-	public void move(char[][] maze) {
-
-		if(this.x==posEspadaX) {
-			if(this.y==posEspadaY)
-				this.espada=true;
-			else if(this.y<posEspadaY)
-				this.y++;
-			else if(this.y>posEspadaY)
-				this.y--;
-		}
-		else if(this.y==posEspadaY) {
-			if(this.x<posEspadaX)
-				this.x++;
-			else if(this.x>posEspadaX)
-				this.x--;
-		}
-		else {
-			if(this.x<posEspadaX)
-				this.x++;
-			else if(this.x>posEspadaX)
-				this.x--;
-			if (this.y<posEspadaY)
-				this.y++;
-			else if (this.y>posEspadaY)
-				this.y--;
-		}
+	/**
+	 * @return sword
+	 */
+	public boolean getSword() {
+		return sword;
 	}
 	
+	/**
+	 * Set sword to true
+	 */
+	public void setSword() {
+		sword=true;
+	}
 
-	public void move1(char[][] maze, int x1, int y1) { //movimentar com o heroi (representacao implicita)
+	/**
+	 * @return first
+	 */
+	public boolean getFirst() {
+		return first;
+	}
+	
+	/**
+	 * @return initialPos
+	 */
+	public boolean getInitialPos() {
+		return initialPos;
+	}
+
+	/**
+	 * Move eagle with hero
+	 * @param maze
+	 * @param x1 - hero x
+	 * @param y1 - hero y
+	 */
+	public void moveHero(char[][] maze, int x1, int y1) { 
 		this.x=x1;
 		this.y=y1;
 	}
+	
+	/**
+	 * Move eagle to sword
+	 * @param maze
+	 */
+	public void moveSword(char[][] maze) {
 
-	public void move2(char[][] maze, int x1, int y1, int x2, int y2) {// movimentar em direcao a espada
-
-		first=false;
-
-		this.posHeroiX=x1;
-		this.posHeroiY=y1;
-		this.posEspadaX=x2;
-		this.posEspadaY=y2;
-		
-		if(this.x==posEspadaX) {
-			if(this.y==posEspadaY) {
-				this.espada=true;
-				if(maze[posEspadaX][posEspadaY]=='E' ||	maze[posEspadaX-1][posEspadaY]=='D'
-						 || maze[posEspadaX][posEspadaY-1]=='D' || maze[posEspadaX+1][posEspadaY]=='D'
-								 || maze[posEspadaX][posEspadaY+1]=='D')
-					this.dead=true; //aguia "morre" se espada ja nao estiver la e morrer quando o dragao esta la
-			}
-			else if(this.y<posEspadaY)
+		if(this.x==swordX) {
+			if(this.y==swordY)
+				this.sword=true;
+			else if(this.y<swordY)
 				this.y++;
-			else if(this.y>posEspadaY)
+			else if(this.y>swordY)
 				this.y--;
 		}
-		else if(this.y==posEspadaY) {
-			if(this.x<posEspadaX)
+		else if(this.y==swordY) {
+			if(this.x<swordX)
 				this.x++;
-			else if(this.x>posEspadaX)
+			else if(this.x>swordX)
 				this.x--;
 		}
 		else {
-			if(this.x<posEspadaX)
+			if(this.x<swordX)
 				this.x++;
-			else if(this.x>posEspadaX)
+			else if(this.x>swordX)
 				this.x--;
-			if (this.y<posEspadaY)
+			if (this.y<swordY)
 				this.y++;
-			else if (this.y>posEspadaY)
+			else if (this.y>swordY)
 				this.y--;
 		}
 	}
 
+	/**
+	 * Move eagle to sword (first move)
+	 * @param maze
+	 * @param x1 - initial x hero
+	 * @param y1 - initial y hero
+	 * @param x2 - sword x
+	 * @param y2 - sword y
+	 */
+	public void moveSwordFirst(char[][] maze, int x1, int y1, int x2, int y2) {
 
-	public boolean first() {
-		return first;
+		first=false;
+
+		this.heroX=x1;
+		this.heroY=y1;
+		this.swordX=x2;
+		this.swordY=y2;
+		
+		if(this.x==swordX) {
+			if(this.y==swordY) {
+				this.sword=true;
+				if(maze[swordX][swordY]=='E' ||	maze[swordX-1][swordY]=='D'
+						 || maze[swordX][swordY-1]=='D' || maze[swordX+1][swordY]=='D'
+								 || maze[swordX][swordY+1]=='D')
+					this.dead=true; 
+				}
+			else if(this.y<swordY)
+				this.y++;
+			else if(this.y>swordY)
+				this.y--;
+		}
+		else if(this.y==swordY) {
+			if(this.x<swordX)
+				this.x++;
+			else if(this.x>swordX)
+				this.x--;
+		}
+		else {
+			if(this.x<swordX)
+				this.x++;
+			else if(this.x>swordX)
+				this.x--;
+			if (this.y<swordY)
+				this.y++;
+			else if (this.y>swordY)
+				this.y--;
+		}
 	}
 
-	public void retorno(char[][] maze, int x1, int y1) {
+	/**
+	 * Return to hero
+	 * @param maze
+	 * @param x1 - current x hero
+	 * @param y1 - current y hero
+	 */
+	public void return1(char[][] maze, int x1, int y1) {
 
-		if(!posInicial) {
-			if(this.x==posHeroiX) {
-				if(this.y==posHeroiY) {
-					posInicial=true;
-					retorno2(maze, x1, y1);
+		if(!initialPos) {
+			if(this.x==heroX) {
+				if(this.y==heroY) {
+					initialPos=true;
+					return2(maze, x1, y1);
 				}
-				else if(this.y<posHeroiY)
+				else if(this.y<heroY)
 					this.y++;
-				else if(this.y>posHeroiY)
+				else if(this.y>heroY)
 					this.y--;
 			}
-			else if(this.y==posHeroiY) {
-				if(this.x<posHeroiX)
+			else if(this.y==heroY) {
+				if(this.x<heroX)
 					this.x++;
-				else if(this.x>posHeroiX)
+				else if(this.x>heroX)
 					this.x--;
 			}
 			else {
-				if(this.x<posHeroiX)
+				if(this.x<heroX)
 					this.x++;
-				else if(this.x>posHeroiX)
+				else if(this.x>heroX)
 					this.x--;
-				if (this.y<posHeroiY)
+				if (this.y<heroY)
 					this.y++;
-				else if (this.y>posHeroiY)
+				else if (this.y>heroY)
 					this.y--;
 			}
 		} else 
-			retorno2(maze, x1, y1);
+			return2(maze, x1, y1);
 
 	}
 
-	private void retorno2(char[][] maze, int x1, int y1) {
+	/**
+	 * Return to hero from initial hero position
+	 * @param maze
+	 * @param x1 - current x hero
+	 * @param y1 - current y hero
+	 */
+	private void return2(char[][] maze, int x1, int y1) {
 		
 		if(this.x==x1) {
 			if(this.y==y1) {
@@ -177,9 +229,5 @@ public class Eagle extends Mobile {
 			else if (this.y>y1)
 				this.y--;
 		}		
-	}
-
-	public boolean posInicial() {
-		return posInicial;
 	}
 }

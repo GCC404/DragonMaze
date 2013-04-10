@@ -2,21 +2,45 @@ package maze.logic;
 
 import maze.generate.Generator;
 
-
 public class Dragon extends Mobile {
 	
 	private boolean sleep=false;
 	private int mode=3;
 	
+	/**
+	 * Dragon constructor
+	 * @param x 
+	 * @param y
+	 * @param mode-1:stop, 2:random, 3:random+sleep
+	 */
 	public Dragon(int x, int y, int mode) {
 		super(x,y,'D');
 		this.mode=mode;
 	}
+	
+	/**
+	 * @return sleep
+	 */
+	public boolean getSleep() {
+		return sleep;
+	}
+	
+	/**
+	 * Set sleep
+	 */
+	public void setSleep() {
+		sleep=true;
+		this.sym='d';
+	}
 
+	/**
+	 * Move dragon
+	 * @param maze
+	 */
 	public void move(char[][] maze) {
 
 		if(this.mode==3) {
-			if(Generator.nextInt(6)==0)
+			if(generator.nextInt(6)==0)
 				sleep=!sleep;
 
 			if(sleep) {
@@ -61,6 +85,10 @@ public class Dragon extends Mobile {
 		}
 	}
 
+	/**
+	 * Generate random move
+	 * @return move
+	 */
 	private String genMovem() {
 
 		int a = Generator.nextInt(5);
@@ -77,11 +105,7 @@ public class Dragon extends Mobile {
 		case 4:
 			return "D";
 		}
-
 		return "";
 	}
-	
-	public boolean isAsleep() {
-		return sleep;
-	}
+
 }

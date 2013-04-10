@@ -6,13 +6,39 @@ public class Hero extends Mobile {
 
 	private boolean wield=false;
 
+	/**
+	 * Heor constructor
+	 * @param x
+	 * @param y
+	 */
 	public Hero(int x, int y) {
 		super(x,y,'H');
 	}
 	
+	/**
+	 * Set weild to true
+	 */
+	public void setWeild() {
+		this.sym='A';
+		wield=true;
+	}
+
+	/**
+	 * @return weild
+	 */
+	public boolean isWield() {
+		return wield;
+	}
+	
+	/**
+	 * Move hero
+	 * @param maze
+	 * @param countDragons-true if hero has already killed all dragons
+	 * @return 0:keep playing; 1:move eagle; 2:win
+	 */
 	public int move(char[][] maze, boolean countDragons) {
 
-		String move=CLI.lerInput();
+		String move=CLI.readInput();
 
 		switch(move) {
 		case "A":
@@ -21,7 +47,7 @@ public class Hero extends Mobile {
 				return 0;
 
 			if(maze[x][y-1]=='E')
-				this.weild();
+				this.setWeild();
 
 			if(maze[x][y-1]=='S' && countDragons) {
 				y--;
@@ -39,7 +65,7 @@ public class Hero extends Mobile {
 				return 0;
 
 			if(maze[x-1][y]=='E')
-				this.weild();
+				this.setWeild();
 
 			if(maze[x-1][y]=='S' && countDragons) {
 				x--;
@@ -57,7 +83,7 @@ public class Hero extends Mobile {
 				return 0;
 
 			if(maze[x][y-1]=='E')
-				this.weild();
+				this.setWeild();
 
 			if(maze[x][y+1]=='S' && countDragons) {
 				y++;
@@ -75,7 +101,7 @@ public class Hero extends Mobile {
 				return 0;
 
 			if(maze[x+1][y]=='E')
-				this.weild();
+				this.setWeild();
 
 			if(maze[x+1][y]=='S' && countDragons) {
 				x++;
@@ -96,12 +122,5 @@ public class Hero extends Mobile {
 		}
 	}
 
-	public void weild() {
-		this.sym='A';
-		wield=true;
-	}
-
-	public boolean isWield() {
-		return wield;
-	}
+	
 }
