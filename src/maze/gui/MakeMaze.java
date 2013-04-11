@@ -19,6 +19,8 @@ import maze.generate.Maze;
 import maze.logic.Hero;
 import maze.logic.Sword;
 import javax.swing.JToggleButton;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 @SuppressWarnings("serial")
 public class MakeMaze extends JFrame {
@@ -30,6 +32,7 @@ public class MakeMaze extends JFrame {
 	private int exitx=-1, exity=-1, herox=-1, heroy=-1, swordx=-1, swordy=-1;
 	private ArrayList<Integer> dragons=new ArrayList<Integer>();
 	private JToggleButton previousbtn;
+	private IncMazeDial incompleteMaze = new IncMazeDial();
 
 	public void reset() {
 		mazen=new char[5][5];
@@ -60,6 +63,12 @@ public class MakeMaze extends JFrame {
 	 * Create the frame.
 	 */
 	public MakeMaze() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent arg0) {
+				gamepanel.requestFocusInWindow();
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 539, 659);
 		contentPane = new JPanel();
@@ -144,7 +153,9 @@ public class MakeMaze extends JFrame {
 		btnFinish.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				setVisible(false);
+				if(exitx!=-1 && dragons.size()>0 && herox!=-1 && swordx!=-1)
+					setVisible(false);
+				else incompleteMaze.setVisible(true);
 			}
 		});
 		btnFinish.setBounds(401, 54, 89, 23);
@@ -191,9 +202,16 @@ public class MakeMaze extends JFrame {
 		gamepanel=new ShowMaze(mazen);
 		gamepanel.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {				
+			public void mouseClicked(MouseEvent arg0) {
+				/*
+				 * Draws accordingly to mouse input.
+				 * Blocks drawing on invalid spots
+				 * and guarantees presence of only
+				 * one instance of unique objects
+				 * (sword, hero and exit).
+				 */
+				
 				int size=500/mazen.length, x=arg0.getX()/size, y=arg0.getY()/size;
-
 
 				switch(drawing) {
 				case 'E':
@@ -320,15 +338,18 @@ public class MakeMaze extends JFrame {
 	}
 	
 	public Maze getMaze() {
-		mazen[heroy][herox]=' ';
-		mazen[swordy][swordx]=' ';
 		
+		//Converts maze to wall-only
+		mazen[heroy][herox]=' ';
+		mazen[swordy][swordx]=' ';		
 		for(int i=0; i<dragons.size(); i+=2)
 			mazen[dragons.get(i)][dragons.get(i+1)]=' ';
 		
+		//Clones maze array
 		deepclone=new char[mazen.length][mazen.length];
 		for(int i=0; i<mazen.length; i++)
 			deepclone[i]=mazen[i].clone();
+		
 		return new Maze(deepclone);
 	}
 }

@@ -33,7 +33,7 @@ public class GUIs extends JFrame {
 	private MakeMaze makemaze=new MakeMaze();
 	private ShowMaze gamepanel;
 	private GameOptions optionwindow=new GameOptions();
-	private Won wonwindow=new Won();
+	private WonDial wonwindow=new WonDial();
 	private String gameoptions="P P 1";
 	/**
 	 * Launch the application.
@@ -77,11 +77,11 @@ public class GUIs extends JFrame {
 				if(JOptionPane.showConfirmDialog(null, "Are you sure?")==0) {
 					gameoptions=optionwindow.getOptions();
 					CLI.setScanner(gameoptions);
-					
+
 					if(makemaze.getHero().getY()==-1)
 						game=new Logic();
 					else game=new Logic(makemaze.getMaze(),makemaze.getHero(),makemaze.getSword(),makemaze.getDragons(),3);
-					
+
 					makemaze.reset();
 					gamepanel.updateStatus(game.getMaze());
 				}
@@ -111,22 +111,12 @@ public class GUIs extends JFrame {
 		gamepanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				char c=e.getKeyChar();
-
-				if(c!='\n' && c!=' ') {
-					String input=String.valueOf(c).toUpperCase();
-					/*
-				System.out.println(input+"W");
-				System.out.println(input!="W");
-				System.out.println(input!="W" && input!="A" && input!="S" && input!="D");
-
-				if(input!="W" && input!="A" && input!="S" && input!="D")
-					return;
-					 */
-					CLI.setScanner(input);
-				}
-				int response=game.makePlay();
 				
+				//Reads keyboard input and converts to upper case string
+				CLI.setScanner(String.valueOf(e.getKeyChar()).toUpperCase());
+				
+				int response=game.makePlay();
+
 				if(response==1) {
 					wonwindow.won(true);
 					wonwindow.setVisible(true);
@@ -175,12 +165,10 @@ public class GUIs extends JFrame {
 				if (os != null)
 					try {
 						os.close();
-						System.out.println("Gravou");
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				
+
 				gamepanel.requestFocusInWindow();
 			}
 		});
@@ -204,9 +192,7 @@ public class GUIs extends JFrame {
 				finally { if (is != null)
 					try {
 						is.close();
-						System.out.println("Carregou");
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -217,7 +203,7 @@ public class GUIs extends JFrame {
 		});
 		btnLoadGame.setBounds(294, 521, 101, 23);
 		contentPane.add(btnLoadGame);
-		
+
 		JButton btnMakeMaze = new JButton("Make Maze");
 		btnMakeMaze.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

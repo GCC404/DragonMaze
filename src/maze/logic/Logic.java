@@ -39,10 +39,10 @@ public class Logic implements Serializable {
 		this.hero=hero;
         
 		dragons=new Dragon[posDragons.size()/2];
-		for(int i=0; i<posDragons.size(); i+=2) {
-			System.out.println("criou em "+i/2);
+		
+		for(int i=0; i<posDragons.size(); i+=2)
 			dragons[i/2]=new Dragon(posDragons.get(i), posDragons.get(i+1), mode);
-		}
+
 		Maze.updateDragons(posDragons.size()/2+1);
         
 		this.sword=sword;
@@ -225,8 +225,9 @@ public class Logic implements Serializable {
 		}
 	}
 
+
 	/**
-	 * TODO
+	 * General gameplay cycle.
 	 */
 	public void play() {  
 
@@ -241,8 +242,8 @@ public class Logic implements Serializable {
 		}
 
 		if(response==1)
-			System.out.println("GANHASTE MÁNINHO!");
-		else System.out.println("Já foste.");
+			System.out.println("You won!");
+		else System.out.println("You lose..");
 	}
 
 	/**

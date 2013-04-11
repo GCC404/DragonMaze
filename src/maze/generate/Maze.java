@@ -1,5 +1,6 @@
 package maze.generate;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
@@ -7,7 +8,8 @@ import java.util.Stack;
 import maze.cli.CLI;
 import maze.logic.*;
 
-public class Maze {
+@SuppressWarnings("serial")
+public class Maze implements Serializable {
 	
 	private Random generator=new Random();
 	private int size=10;
@@ -171,7 +173,9 @@ public class Maze {
 	}
 
 	/**
-	 * TODO
+	 * Given a certain cell, picks a new one
+	 * and makes it blank.
+	 * 
 	 * @param x
 	 * @param y
 	 * @param maze
@@ -260,7 +264,9 @@ public class Maze {
 	}
 
 	/**
-	 * TODO
+	 * Checks if current generated maze
+	 * breaks any pre-established rule.
+	 * 
 	 * @param maze
 	 * @return
 	 */
@@ -284,9 +290,10 @@ public class Maze {
 	}
 
 	/**
-	 * TODO
+	 * Checks whether generated maze
+	 * is finished or not.
+	 * 
 	 * @param maze
-	 * @return
 	 */
 	private static boolean checkStop(char[][] maze) {
 

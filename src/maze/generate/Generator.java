@@ -8,7 +8,7 @@ public class Generator {
 	private static Random generator=new Random();
 	
 	/**
-	 * TODO
+	 * Defines pre-determined numbers to be generated
 	 * @param ttest
 	 */
 	public static void setTest(int [] ttest) {
@@ -17,32 +17,19 @@ public class Generator {
 	}
 	
 	/**
-	 * TODO
+	 * Similar to java's Random.nextInt
 	 * @param limit
-	 * @return
+	 * @return A number, random or not, depending if test was set.
 	 */
 	public static int nextInt(int limit) {
 		if(test.length==0)
 			return generator.nextInt(limit);
 		
 		i++;
+		
+		if(i>=test.length)
+			return generator.nextInt(limit);
+		
 		return test[i-1];
 	}
-	
-	/*
-	 * 		int a = generator.nextInt(5);
-
-		switch(a) {
-		case 0:
-			return "";
-		case 1:S
-			return "W";
-		case 2:
-			return "A";
-		case 3:
-			return "S";
-		case 4:
-			return "D";
-		}
-	 */
 }

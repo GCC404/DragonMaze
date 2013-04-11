@@ -67,7 +67,7 @@ public class GameOptions extends JDialog {
 		tglbtnDefaultMaze.setBounds(10, 11, 95, 23);
 		contentPanel.add(tglbtnDefaultMaze);
 
-		String []options={"Random","Asleep","Random & Asleep"};
+		String []options={"Stopped","Asleep","Random & Asleep"};
 		comboBox = new JComboBox<String>(options);
 		comboBox.setSelectedIndex(1);
 		comboBox.setBounds(115, 12, 95, 23);

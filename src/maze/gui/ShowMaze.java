@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class ShowMaze extends JPanel {
-	private BufferedImage wall, dragon, sword, dragonasleep, hero, herosword, exit, eagle;
+	private BufferedImage wall, dragon, sword, dragonasleep, hero, herosword, exit, eagle, dragonsword;
 	private char[][] maze={ 
 			 {'x','x','x','x','x','x','x','x','x','x'},
 			 {'x',' ',' ',' ',' ',' ',' ',' ',' ','x'},
@@ -27,15 +27,16 @@ public class ShowMaze extends JPanel {
 	public ShowMaze(char[][] maze) {
 		try {                
 			wall = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\wall.jpg"));
-			dragon = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragao.png"));
+			dragon = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragon.png"));
 			sword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\sword.jpg"));
-			dragonasleep = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragaosleep.png"));
+			dragonasleep = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragonsleep.png"));
 			hero = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\hero.jpg"));
 			herosword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\herosword.gif"));
 			exit = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\exit.jpg"));
 			eagle = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\eagle.png"));
+			dragonsword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragonsword.png"));
 		} catch (IOException ex) {
-			// handle exception...
+			ex.printStackTrace();
 		}
 
 		if(maze!=null)
@@ -78,6 +79,9 @@ public class ShowMaze extends JPanel {
 					break;
 				case 'G':
 					g.drawImage(eagle, x*size, y*size, size, size, null);
+					break;
+				case 'F':
+					g.drawImage(dragonsword, x*size, y*size, size, size, null);
 					break;
 				}
 			}
