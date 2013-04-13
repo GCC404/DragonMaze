@@ -1,4 +1,4 @@
-package maze.generate;
+package maze.logic;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -6,7 +6,6 @@ import java.util.Random;
 import java.util.Stack;
 
 import maze.cli.CLI;
-import maze.logic.*;
 
 @SuppressWarnings("serial")
 public class Maze implements Serializable {

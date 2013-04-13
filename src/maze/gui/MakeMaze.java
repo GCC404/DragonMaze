@@ -15,7 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 
-import maze.generate.Maze;
+import maze.logic.Maze;
 import maze.logic.Hero;
 import maze.logic.Sword;
 import javax.swing.JToggleButton;

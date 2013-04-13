@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-import maze.generate.Maze;
+import maze.logic.Maze;
 import maze.cli.*;
 
 @SuppressWarnings("serial")

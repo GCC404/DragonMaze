@@ -2,7 +2,7 @@ package maze.logic;
 
 import java.io.Serializable;
 
-import maze.generate.Generator;
+import maze.generator.Generator;
 
 @SuppressWarnings("serial")
 public class GameElement implements Serializable {
