@@ -124,8 +124,10 @@ public class Logic implements Serializable {
 		checkCollision();
 		int ret;
 		
+		String input=CLI.readInput();
+		
 		if(!hero.getDead())
-			ret=hero.move(maze.getMaze(), countDragons());
+			ret=hero.move(maze.getMaze(), countDragons(), input);
 		else return -1;		
 		
 		if(ret==1 && !eagle.getDead())
@@ -179,7 +181,8 @@ public class Logic implements Serializable {
 	 * Print maze
 	 */
 	public void printConsole() {
-		maze.printConsole(hero, dragons, sword, eagle);
+		maze.update(hero, dragons, sword, eagle);
+		CLI.printMaze(maze.getMaze());
 	}
 
 	/**

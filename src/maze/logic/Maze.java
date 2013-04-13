@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
 
-import maze.cli.CLI;
-
 @SuppressWarnings("serial")
 public class Maze implements Serializable {
 	
@@ -360,19 +358,20 @@ public class Maze implements Serializable {
 		maze[0][0]='x';
 	}
 
+	/*
 	/**
 	 * Print maze
 	 * @param hero
 	 * @param dragons
 	 * @param sword
 	 * @param eagle
-	 */
+	 *//*
 	public void printConsole(Hero hero, Dragon[] dragons, Sword sword, Eagle eagle) {
 		
 		update(hero,dragons,sword, eagle);
 		
 		CLI.printMaze(maze);
-	}
+	}*/
 
 	/**
 	 * Update oldXdragon and oldYdragon

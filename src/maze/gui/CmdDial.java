@@ -15,13 +15,14 @@ import java.awt.GridLayout;
 @SuppressWarnings("serial")
 public class CmdDial extends JDialog {
 	
-	private char []commands={'W','S','A','D'};
+	private char []commands={'W','S','A','D','V'};
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtW;
 	private JTextField txtS;
 	private JTextField txtA;
 	private JTextField txtD;
+	private JTextField txtV;
 
 	/**
 	 * Launch the application.
@@ -40,7 +41,7 @@ public class CmdDial extends JDialog {
 	 * Create the dialog.
 	 */
 	public CmdDial() {
-		setBounds(100, 100, 179, 229);
+		setBounds(100, 100, 179, 171);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -86,6 +87,16 @@ public class CmdDial extends JDialog {
 			txtD.setColumns(10);
 		}
 		{
+			JLabel lblEagle = new JLabel("Eagle");
+			contentPanel.add(lblEagle);
+		}
+		{
+			txtV = new JTextField();
+			txtV.setText("V");
+			contentPanel.add(txtV);
+			txtV.setColumns(10);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -112,6 +123,8 @@ public class CmdDial extends JDialog {
 						commands[1]=txtS.getText().toCharArray()[0];
 						commands[2]=txtA.getText().toCharArray()[0];
 						commands[3]=txtD.getText().toCharArray()[0];
+						commands[4]=txtV.getText().toCharArray()[0];
+						
 						setVisible(false);
 					}
 				});

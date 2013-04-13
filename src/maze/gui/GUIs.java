@@ -36,7 +36,7 @@ public class GUIs extends JFrame {
 	private WonDial wonwindow=new WonDial();
 	private CmdDial commandwindow=new CmdDial();
 	private String gameoptions="P P 1";
-	char up='W',down='S',left='A',right='D';
+	char up='W',down='S',left='A',right='D',eagle='V';
 	/**
 	 * Launch the application.
 	 */
@@ -129,6 +129,8 @@ public class GUIs extends JFrame {
 					input="A";
 				else if(cmd==right)
 					input="D";
+				else if(cmd==eagle)
+					input="V";
 				else return;
 				
 				CLI.setScanner(input);
@@ -255,6 +257,7 @@ public class GUIs extends JFrame {
 				down=commands[1];
 				left=commands[2];
 				right=commands[3];
+				eagle=commands[4];
 				
 				gamepanel.requestFocusInWindow();
 			}

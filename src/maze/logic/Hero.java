@@ -2,8 +2,6 @@ package maze.logic;
 
 import java.io.Serializable;
 
-import maze.cli.CLI;
-
 @SuppressWarnings("serial")
 public class Hero extends Mobile implements Serializable {
 
@@ -39,9 +37,9 @@ public class Hero extends Mobile implements Serializable {
 	 * @param countDragons-true if hero has already killed all dragons
 	 * @return 0:keep playing; 1:move eagle; 2:win
 	 */
-	public int move(char[][] maze, boolean countDragons) {
+	public int move(char[][] maze, boolean countDragons, String move) {
 
-		String move=CLI.readInput();
+		//String move=CLI.readInput();
 
 		switch(move) {
 		case "A":
