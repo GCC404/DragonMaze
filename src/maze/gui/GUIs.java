@@ -133,9 +133,7 @@ public class GUIs extends JFrame {
 					input="V";
 				else return;
 				
-				CLI.setScanner(input);
-				
-				int response=game.makePlay();
+				int response=game.makePlay(input);
 
 				if(response==1) {
 					wonwindow.won(true);

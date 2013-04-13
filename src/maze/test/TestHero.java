@@ -15,47 +15,41 @@ public class TestHero {
 	 */
 	@org.junit.Test
 	public void moveHero() {
+		
 		CLI.setScanner("P P");
-		Logic game1 = new Logic();
+		Logic game1 = new Logic(-1, 1, 1);
 
-		CLI.setScanner("D");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("D"));
 		char[][] maze=game1.getMaze();
 		assertSame(maze[1][2],'H');
 		assertSame(maze[1][1],' ');
 
-		CLI.setScanner("D");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("D"));
 		maze=game1.getMaze();
 		assertSame(maze[1][3],'H');
 		assertSame(maze[1][2],' ');
 
-		CLI.setScanner("D");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("D"));
 		maze=game1.getMaze();
 		assertSame(maze[1][4],'H');
 		assertSame(maze[1][3],' ');
 
-		CLI.setScanner("D");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("D"));
 		maze=game1.getMaze();
 		assertSame(maze[1][5],'H');
 		assertSame(maze[1][4],' ');
 
-		CLI.setScanner("A");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("A"));
 		maze=game1.getMaze();
 		assertSame(maze[1][4],'H');
 		assertSame(maze[1][5],' ');
 
-		CLI.setScanner("S");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("S"));
 		maze=game1.getMaze();
 		assertSame(maze[1][4],' ');
 		assertSame(maze[2][4],'H');
 
-		CLI.setScanner("W");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("W"));
 		maze=game1.getMaze();
 		assertSame(maze[1][4],'H');
 		assertSame(maze[2][4],' ');
@@ -68,16 +62,14 @@ public class TestHero {
 	public void moveWall() {
 
 		CLI.setScanner("P P");
-		Logic game1 = new Logic();
+		Logic game1 = new Logic(-1, 1, 1);
 
-		CLI.setScanner("A");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("A"));
 		char[][] maze=game1.getMaze();
 		assertSame(maze[1][1],'H');
 		assertSame(maze[1][0],'x');
 
-		CLI.setScanner("W");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("W"));
 		maze=game1.getMaze();
 		assertSame(maze[1][1],'H');
 		assertSame(maze[0][1],'x');
@@ -86,14 +78,14 @@ public class TestHero {
 	@org.junit.Test
 	public void sword() {
 
-		CLI.setScanner("P P 1");
-		Logic game1 = new Logic();
+		CLI.setScanner("P P");
+		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
-		CLI.setScanner("D D D S S S S A A A S S S W");
+		String moves="DDDSSSSAAASSSW";
 
 		for(int i=0; i<14; i++)
-			assertEquals(0,game1.makePlay());
+			assertEquals(0,game1.makePlay(moves.substring(i, i+1)));
 
 		maze=game1.getMaze();		
 		assertSame(maze[7][1],'A');
@@ -103,13 +95,12 @@ public class TestHero {
 	@org.junit.Test
 	public void die() {
 
-		CLI.setScanner("P P 1");
-		Logic game1 = new Logic();
+		CLI.setScanner("P P");
+		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
-		CLI.setScanner("S");	
-		assertEquals(0,game1.makePlay());	
-		assertEquals(-1,game1.makePlay());
+		assertEquals(0,game1.makePlay("S"));	
+		assertEquals(-1,game1.makePlay(""));
 		maze=game1.getMaze();
 
 		assertSame(maze[3][1],'D');
@@ -119,16 +110,15 @@ public class TestHero {
 	@org.junit.Test
 	public void win() { 
 
-		CLI.setScanner("P P 1");
-		Logic game1 = new Logic();
+		CLI.setScanner("P P");
+		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
-		CLI.setScanner("D D D S S S S A A A S S S W W W W S D D D S S S D D D D W W W");
+		String moves="DDDSSSSAAASSSWWWWSDDDSSSDDDDWWW";
 		for(int i=0; i<31; i++)
-			assertEquals(0,game1.makePlay());
+			assertEquals(0,game1.makePlay(moves.substring(i, i+1)));
 
-		CLI.setScanner("D");
-		assertEquals(1,game1.makePlay());
+		assertEquals(1,game1.makePlay("D"));
 		maze=game1.getMaze();
 		assertSame(maze[5][9],'A');
 	}
@@ -136,16 +126,15 @@ public class TestHero {
 	@org.junit.Test
 	public void failToWin() { 
 
-		CLI.setScanner("P P 1");
-		Logic game1 = new Logic();
+		CLI.setScanner("P P");
+		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
-		CLI.setScanner("D D D S S S S A A A S S S W W W D D D S S S D D D D W W W");
+		String moves="DDDSSSSAAASSSWWWDDDSSSDDDDWWW";
 		for(int i=0; i<29; i++)
-			assertEquals(0,game1.makePlay());
+			assertEquals(0,game1.makePlay(moves.substring(i, i+1)));
 
-		CLI.setScanner("D");
-		assertEquals(0,game1.makePlay());
+		assertEquals(0,game1.makePlay("D"));
 		maze=game1.getMaze();
 		assertSame(maze[5][8],'A');
 		assertNotSame(maze[5][9], 'A');
@@ -154,13 +143,12 @@ public class TestHero {
 	@org.junit.Test
 	public void lose() { 
 
-		CLI.setScanner("P P 1");
-		Logic game1 = new Logic();
+		CLI.setScanner("P P");
+		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
-		CLI.setScanner("S S");
-		assertEquals(0,game1.makePlay());
-		assertEquals(-1,game1.makePlay());
+		assertEquals(0,game1.makePlay("S"));
+		assertEquals(-1,game1.makePlay("S"));
 		maze=game1.getMaze();
 		assertSame(maze[3][1],'D');
 		assertNotSame(maze[2][1], 'H');

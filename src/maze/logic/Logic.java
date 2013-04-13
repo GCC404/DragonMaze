@@ -51,9 +51,12 @@ public class Logic implements Serializable {
 	}
 	
 	
-	/**
-	 * Logic constructor
-	 */
+    /**
+     * Logic constructor
+     * @param size
+     * @param numDragon
+     * @param modeDragon
+     */
 	public Logic(int size, int numDragon, int modeDragon) {
 		maze=new Maze(size);
 		int num=modeDragon;
@@ -65,10 +68,7 @@ public class Logic implements Serializable {
 			numDragons=numDragon;
 			dragons=new Dragon[numDragons];
 			
-			pickEmptyPos(x, 0);
-			dragons[0]=new Dragon(x[0],x[1],num);
-
-			for(int i=1; i<dragons.length; i++) {
+			for(int i=0; i<dragons.length; i++) {
 				pickEmptyPos(x, i);
 				dragons[i]=new Dragon(x[0],x[1],num);
 			}
@@ -96,7 +96,7 @@ public class Logic implements Serializable {
 	/**
 	 * Choose empty position
 	 * @param x-new random positions
-	 * @param i-current number of dragons
+	 * @param i-number of dragons already created
 	 */
 	private void pickEmptyPos(int x[], int i) { 
 		
@@ -218,9 +218,6 @@ public class Logic implements Serializable {
 			eagle.kill();
 		}
 	}
-
-
-
 
 	/**
 	 * Set sleep (only for dragon tests)

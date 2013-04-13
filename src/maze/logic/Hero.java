@@ -39,7 +39,6 @@ public class Hero extends Mobile implements Serializable {
 	 */
 	public int move(char[][] maze, boolean countDragons, String move) {
 
-		//String move=CLI.readInput();
 
 		switch(move) {
 		case "A":
