@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import maze.logic.Maze;
-import maze.cli.*;
 
 @SuppressWarnings("serial")
 public class Logic implements Serializable {
@@ -55,15 +54,15 @@ public class Logic implements Serializable {
 	/**
 	 * Logic constructor
 	 */
-	public Logic() {
-		maze=new Maze(CLI.chooseMaze());
-		int num=CLI.chooseModeDragons();
+	public Logic(int size, int numDragon, int modeDragon) {
+		maze=new Maze(size);
+		int num=modeDragon;
 		
 		int []x=new int[2];	
 		
 		if(!maze.isDefault()) {
 				
-			numDragons=CLI.chooseNumDragons();
+			numDragons=numDragon;
 			dragons=new Dragon[numDragons];
 			
 			pickEmptyPos(x, 0);
@@ -119,12 +118,10 @@ public class Logic implements Serializable {
 	 * Make play
 	 * @return 1:won, -1:lost, 0:keep playing
 	 */
-	public int makePlay() {
+	public int makePlay(String input) {
 
 		checkCollision();
 		int ret;
-		
-		String input=CLI.readInput();
 		
 		if(!hero.getDead())
 			ret=hero.move(maze.getMaze(), countDragons(), input);
@@ -177,13 +174,7 @@ public class Logic implements Serializable {
 		return (count==numDragons);
 	}
 
-	/**
-	 * Print maze
-	 */
-	public void printConsole() {
-		maze.update(hero, dragons, sword, eagle);
-		CLI.printMaze(maze.getMaze());
-	}
+	
 
 	/**
 	 * Check collisions between all game elements
@@ -229,25 +220,7 @@ public class Logic implements Serializable {
 	}
 
 
-	/**
-	 * General gameplay cycle.
-	 */
-	public void play() {  
 
-		int response=0;
-
-		printConsole();
-
-		while(response==0) {
-
-			response=makePlay();
-			printConsole();
-		}
-
-		if(response==1)
-			System.out.println("You won!");
-		else System.out.println("You lose..");
-	}
 
 	/**
 	 * Set sleep (only for dragon tests)

@@ -18,13 +18,13 @@ public class TestDragon {
 	public void dragonStopped() {
 
 		CLI.setScanner("P P");
-		Logic game1 = new Logic();
+		Logic game1 = new Logic(-1,1,1);
 		char[][] maze;
 
-		CLI.setScanner("D D D S S S S A A A S S S W W W D D D S S S D D D D W");
+		String moves="DDDSSSSAAASSSWWWDDDSSSDDDDW";
 
 		for(int i=0; i<27; i++) {
-			game1.makePlay();
+			game1.makePlay(moves.substring(i, i+1));
 			maze=game1.getMaze();
 			assertSame(maze[3][1],'D');
 		}
@@ -56,8 +56,7 @@ public class TestDragon {
 	@org.junit.Test
 	public void dragonRandomMove() {
 
-		CLI.setScanner("P A 1");
-		Logic game1 = new Logic();
+		Logic game1 = new Logic(-1,1,2);
 		char[][] maze;
 		int[] dragonMove={3,3,4};
 		Generator.setTest(dragonMove);
