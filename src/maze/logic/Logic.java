@@ -127,7 +127,7 @@ public class Logic implements Serializable {
 			ret=hero.move(maze.getMaze(), countDragons(), input);
 		else return -1;		
 		
-		if(ret==1 && !eagle.getDead())
+		if(ret==1 && !eagle.getDead() && !sword.getWield())
 			eagle.setMove();
 		else if(ret==2)
 			return 1;
@@ -147,10 +147,8 @@ public class Logic implements Serializable {
 			}
 		}
 		
-		if(eagle.getSword() && eagle.getX()==hero.getX() && eagle.getY()==hero.getY()) {
+		if(eagle.getSword() && eagle.getX()==hero.getX() && eagle.getY()==hero.getY())
 			hero.setWeild();
-			eagle.kill();
-		}
 
 		for(int i=0; i<numDragons; i++) {
 			if(!dragons[i].getDead())
@@ -215,7 +213,6 @@ public class Logic implements Serializable {
 		if(hero.getX()==sword.getX() && hero.getY()==sword.getY()) {
 			hero.setWeild();
 			sword.setWield();
-			eagle.kill();
 		}
 	}
 

@@ -1,9 +1,10 @@
 package maze.logic;
 
+import java.io.Serializable;
 import java.util.Random;
 
 @SuppressWarnings("serial")
-public abstract class Mobile extends GameElement {
+public abstract class Mobile extends GameElement implements Serializable{
 	
 	protected Random generator=new Random();
 	protected boolean dead=false;

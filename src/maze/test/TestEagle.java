@@ -1,6 +1,6 @@
 package maze.test;
 import static org.junit.Assert.*;
-import maze.logic.*;
+import maze.logic.Logic;
 import maze.cli.*;
 
 /**
