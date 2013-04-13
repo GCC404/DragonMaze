@@ -63,6 +63,7 @@ public class MakeMaze extends JFrame {
 	 * Create the frame.
 	 */
 	public MakeMaze() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent arg0) {

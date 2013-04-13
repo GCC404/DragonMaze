@@ -34,7 +34,9 @@ public class GUIs extends JFrame {
 	private ShowMaze gamepanel;
 	private GameOptions optionwindow=new GameOptions();
 	private WonDial wonwindow=new WonDial();
+	private CmdDial commandwindow=new CmdDial();
 	private String gameoptions="P P 1";
+	char up='W',down='S',left='A',right='D';
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +57,7 @@ public class GUIs extends JFrame {
 	 * Create the frame.
 	 */
 	public GUIs() {
+		setResizable(false);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent arg0) {
@@ -112,8 +115,23 @@ public class GUIs extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				
-				//Reads keyboard input and converts to upper case string
-				CLI.setScanner(String.valueOf(e.getKeyChar()).toUpperCase());
+				//Reads keyboard input and converts to the corresponding 
+				//upper case string (if that's the case)
+				//String input=String.valueOf(e.getKeyChar());
+				char cmd=e.getKeyChar();
+				String input;
+				
+				if(cmd==up)
+					input="W";
+				else if(cmd==down)
+					input="S";
+				else if(cmd==left)
+					input="A";
+				else if(cmd==right)
+					input="D";
+				else return;
+				
+				CLI.setScanner(input);
 				
 				int response=game.makePlay();
 
@@ -147,7 +165,7 @@ public class GUIs extends JFrame {
 				repaint();
 			}
 		});
-		options.setBounds(115, 521, 82, 23);
+		options.setBounds(115, 521, 94, 23);
 		contentPane.add(options);
 
 		JButton btnSaveGame = new JButton("Save game");
@@ -172,7 +190,7 @@ public class GUIs extends JFrame {
 				gamepanel.requestFocusInWindow();
 			}
 		});
-		btnSaveGame.setBounds(194, 521, 101, 23);
+		btnSaveGame.setBounds(207, 521, 101, 23);
 		contentPane.add(btnSaveGame);
 
 		JButton btnLoadGame = new JButton("Load game");
@@ -201,7 +219,7 @@ public class GUIs extends JFrame {
 				gamepanel.requestFocusInWindow();
 			}
 		});
-		btnLoadGame.setBounds(294, 521, 101, 23);
+		btnLoadGame.setBounds(305, 521, 101, 23);
 		contentPane.add(btnLoadGame);
 
 		JButton btnMakeMaze = new JButton("Make Maze");
@@ -210,7 +228,38 @@ public class GUIs extends JFrame {
 				makemaze.setVisible(true);
 			}
 		});
-		btnMakeMaze.setBounds(10, 547, 385, 23);
+		btnMakeMaze.setBounds(10, 547, 106, 23);
 		contentPane.add(btnMakeMaze);
+		
+		JButton btnNewButton_1 = new JButton("Choose commands");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				commandwindow.setVisible(true);
+			}
+		});
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(115, 547, 152, 23);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Update commands");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {	
+				char []commands=commandwindow.getCmds();
+				
+				up=commands[0];
+				down=commands[1];
+				left=commands[2];
+				right=commands[3];
+				
+				gamepanel.requestFocusInWindow();
+			}
+		});
+		btnNewButton_2.setBounds(266, 547, 141, 23);
+		contentPane.add(btnNewButton_2);
 	}
 }

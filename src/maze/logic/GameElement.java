@@ -2,8 +2,11 @@ package maze.logic;
 
 import java.io.Serializable;
 
+import maze.generate.Generator;
+
 @SuppressWarnings("serial")
 public class GameElement implements Serializable {
+	protected Generator random=new Generator();
 	protected int x, y;
 	protected char sym;
 	
