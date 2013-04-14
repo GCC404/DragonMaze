@@ -1,7 +1,6 @@
 package maze.test;
 import static org.junit.Assert.*;
 import maze.logic.Logic;
-import maze.cli.*;
 import maze.generator.Generator;
 
 /**
@@ -17,7 +16,6 @@ public class TestDragon {
 	@org.junit.Test
 	public void dragonStopped() {
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1,1,1);
 		char[][] maze;
 
@@ -36,7 +34,6 @@ public class TestDragon {
 	@org.junit.Test
 	public void dragonSleep() {
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1,1,1);
 		char[][] maze;
 
@@ -51,7 +48,7 @@ public class TestDragon {
 	}
 
 	@org.junit.Test
-	public void dragonRandomMove() { //arranjar
+	public void dragonRandomMove() {
 
 		Logic game1 = new Logic(-1,1,2);
 		char[][] maze;
@@ -73,8 +70,7 @@ public class TestDragon {
 	
 	@org.junit.Test
 	public void multipleDragons() {
-		
-		CLI.setScanner("A 10 P 1");
+
 		Logic game1 = new Logic(10, 1, 1);
 		char[][] maze=game1.getMaze();
 		int count=0;
@@ -84,9 +80,10 @@ public class TestDragon {
 				count++;
 			}
 		}
+
 		assertSame(count, 1);
 		
-		CLI.setScanner("A 40 P 2");
+
 		Logic game2 = new Logic(40, 2, 1);
 		maze=game2.getMaze();
 		count=0;
@@ -98,7 +95,6 @@ public class TestDragon {
 		}
 		assertSame(count, 2);
 		
-		CLI.setScanner("A 40 P 3");
 		Logic game3 = new Logic(40, 3, 1);
 		maze=game3.getMaze();
 		count=0;

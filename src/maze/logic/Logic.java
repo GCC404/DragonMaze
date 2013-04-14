@@ -9,7 +9,7 @@ import maze.logic.Maze;
 @SuppressWarnings("serial")
 public class Logic implements Serializable {
 
-	private Random gerador= new Random();
+	private Random generator= new Random();
 	private Hero hero;
 	private Sword sword;
 	private Maze maze;
@@ -79,6 +79,7 @@ public class Logic implements Serializable {
 			do
 				pickEmptyPos(x, numDragons);
 			while((x[0]==sword.getX() && x[1]==sword.getY()));
+			
 			hero=new Hero(x[0],x[1]);
 			
 		} else {
@@ -104,14 +105,15 @@ public class Logic implements Serializable {
 		char[][] auxmaze=maze.getMaze();
 
 		do {
-			x[0]=gerador.nextInt(max);
-			x[1]=gerador.nextInt(max);
+			x[0]=generator.nextInt(max);
+			x[1]=generator.nextInt(max);
 		} while (auxmaze[x[0]][x[1]]!=' ');	
-
+		
 		for(int j=0; j<i; j++) {
 			if(dragons[j].getX()==x[0] && dragons[j].getY()==x[1])
 				pickEmptyPos(x, i);
 		}
+	
 	}
 
 	/**

@@ -82,7 +82,7 @@ public class GUIs extends JFrame {
 					CLI.setScanner(gameoptions);
 
 					if(makemaze.getHero().getY()==-1)
-						game=new Logic();
+						game=new Logic(-1,1,1);
 					else game=new Logic(makemaze.getMaze(),makemaze.getHero(),makemaze.getSword(),makemaze.getDragons(),3);
 
 					makemaze.reset();
@@ -108,7 +108,7 @@ public class GUIs extends JFrame {
 
 
 		CLI.setScanner(gameoptions);
-		game=new Logic();		
+		game=new Logic(-1,1,1);		
 		gamepanel = new ShowMaze(game.getMaze());
 
 		gamepanel.addKeyListener(new KeyAdapter() {
@@ -140,14 +140,14 @@ public class GUIs extends JFrame {
 					wonwindow.setVisible(true);
 					gameoptions=optionwindow.getOptions();
 					CLI.setScanner(gameoptions);
-					game=new Logic();
+					game=new Logic(-1,1,1);
 					gamepanel.updateStatus(game.getMaze());
 				} else if(response==-1) {					
 					wonwindow.won(false);
 					wonwindow.setVisible(true);
 					gameoptions=optionwindow.getOptions();
 					CLI.setScanner(gameoptions);
-					game=new Logic();
+					game=new Logic(-1,1,1);
 					gamepanel.updateStatus(game.getMaze());
 				} else gamepanel.updateStatus(game.getMaze());
 			}
@@ -178,6 +178,7 @@ public class GUIs extends JFrame {
 					os.writeObject(game);
 				}
 				catch(IOException e) {
+					e.printStackTrace();
 					System.out.println("Couldn't savegame.");
 				}
 				if (os != null)

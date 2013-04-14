@@ -1,7 +1,6 @@
 package maze.test;
 import static org.junit.Assert.*;
 import maze.logic.*;
-import maze.cli.*;
 
 /**
  * Test class for hero
@@ -16,7 +15,6 @@ public class TestHero {
 	@org.junit.Test
 	public void moveHero() {
 		
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 
 		assertEquals(0,game1.makePlay("D"));
@@ -61,7 +59,6 @@ public class TestHero {
 	@org.junit.Test
 	public void moveWall() {
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 
 		assertEquals(0,game1.makePlay("A"));
@@ -78,7 +75,6 @@ public class TestHero {
 	@org.junit.Test
 	public void sword() {
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
@@ -95,7 +91,6 @@ public class TestHero {
 	@org.junit.Test
 	public void die() {
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
@@ -110,7 +105,6 @@ public class TestHero {
 	@org.junit.Test
 	public void win() { 
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
@@ -126,7 +120,6 @@ public class TestHero {
 	@org.junit.Test
 	public void failToWin() { 
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 
@@ -143,7 +136,6 @@ public class TestHero {
 	@org.junit.Test
 	public void lose() { 
 
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 		char[][] maze;
 

@@ -6,7 +6,7 @@ import maze.generator.Generator;
 
 @SuppressWarnings("serial")
 public class GameElement implements Serializable {
-	protected Generator random=new Generator();
+	protected transient Generator random=new Generator();
 	protected int x, y;
 	protected char sym;
 	

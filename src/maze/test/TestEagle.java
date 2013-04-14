@@ -1,7 +1,6 @@
 package maze.test;
 import static org.junit.Assert.*;
 import maze.logic.Logic;
-import maze.cli.*;
 
 /**
  * Test class for eagle
@@ -14,7 +13,6 @@ public class TestEagle {
 	@org.junit.Test
 	public void eagle() {
 		
-		CLI.setScanner("P P");
 		Logic game1 = new Logic(-1, 1, 1);
 
 		assertEquals(0,game1.makePlay("V"));
@@ -29,7 +27,7 @@ public class TestEagle {
 		maze=game1.getMaze();
 		assertSame(maze[1][1],'A');
 
-		CLI.setScanner("V"); //verificar se a aguia se move duas vezes
+		//verificar se a aguia se move duas vezes
 		assertEquals(0,game1.makePlay("V"));
 		maze=game1.getMaze();
 		assertSame(maze[1][1],'A');

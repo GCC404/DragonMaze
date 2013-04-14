@@ -27,7 +27,7 @@ public class Generator {
 		
 		i++;
 		
-		if(i>=test.length)
+		if(i>test.length)
 			return generator.nextInt(limit);
 		
 		return test[i-1];

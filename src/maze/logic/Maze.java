@@ -316,7 +316,7 @@ public class Maze implements Serializable {
 		for(int i=0; i<oldx.length-1; i++)
 			maze[oldx[i]][oldy[i]]=' ';
 		
-		for(int j=0; j<oldXdragon.length-1; j++)
+		for(int j=0; j<oldXdragon.length; j++)
 			maze[oldXdragon[j]][oldYdragon[j]]=' ';
 		
 		if(oldsym!='T')
@@ -334,10 +334,10 @@ public class Maze implements Serializable {
 		for(int i=0; i<dragons.length; i++) {
 			
 			if(!dragons[i].getDead()) {
-				if(sword.getX()==dragons[i].getX() && sword.getX()==dragons[i].getX())
+				if(sword.getX()==dragons[i].getX() && sword.getY()==dragons[i].getY())
 					maze[sword.getX()][sword.getY()]='F';
 				else maze[dragons[i].getX()][dragons[i].getY()]=dragons[i].getSym();
-
+				
 				oldXdragon[i]=dragons[i].getX();
 				oldYdragon[i]=dragons[i].getY();
 			}
@@ -378,7 +378,9 @@ public class Maze implements Serializable {
 	 * @param numDragons
 	 */
 	public static void updateDragons(int numDragons) {
-		oldXdragon=new int[numDragons+1];
-		oldYdragon=new int[numDragons+1];
+		oldXdragon=new int[numDragons];
+		oldYdragon=new int[numDragons];
+		Arrays.fill(oldXdragon,0);
+		Arrays.fill(oldYdragon,0);
 	}
 }

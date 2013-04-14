@@ -95,7 +95,7 @@ public class Dragon extends Mobile implements Serializable {
 	private String genMovem() {
 
 		int a = Generator.nextInt(5);
-
+		
 		switch(a) {
 		case 0:
 			return "";
