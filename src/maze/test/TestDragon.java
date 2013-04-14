@@ -5,14 +5,11 @@ import maze.generator.Generator;
 
 /**
  * Test class to dragon
- * @author Sousa
+ * @author Ana Sousa e Gabriel Candal
  *
  */
 public class TestDragon {
 	
-	/**
-	 * Test 
-	 */
 	@org.junit.Test
 	public void dragonStopped() {
 
@@ -28,9 +25,7 @@ public class TestDragon {
 		}
 	}
 	
-	/**
-	 * 
-	 */
+	
 	@org.junit.Test
 	public void dragonSleep() {
 

@@ -2,7 +2,7 @@ package maze.cli;
 
 import java.util.Scanner;
 
-import maze.logic.*;
+import maze.logic.Logic;
 
 public class CLI {
 

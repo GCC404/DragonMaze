@@ -4,7 +4,7 @@ import maze.logic.Logic;
 
 /**
  * Test class for eagle
- * @author Sousa
+ * @author Ana Sousa e Gabriel Candal
  *
  */
 public class TestEagle {
