@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
-import maze.cli.CLI;
 import maze.logic.Logic;
 
 import java.awt.event.MouseAdapter;
@@ -35,7 +34,7 @@ public class GUIs extends JFrame {
 	private GameOptions optionwindow=new GameOptions();
 	private WonDial wonwindow=new WonDial();
 	private CmdDial commandwindow=new CmdDial();
-	private String gameoptions="P P 1";
+	private int []gameoptions={-1,1,1};
 	char up='W',down='S',left='A',right='D',eagle='V';
 	/**
 	 * Launch the application.
@@ -79,10 +78,9 @@ public class GUIs extends JFrame {
 			public void mousePressed(MouseEvent arg0) {
 				if(JOptionPane.showConfirmDialog(null, "Are you sure?")==0) {
 					gameoptions=optionwindow.getOptions();
-					CLI.setScanner(gameoptions);
 
 					if(makemaze.getHero().getY()==-1)
-						game=new Logic(-1,1,1);
+						game=new Logic(gameoptions[0],gameoptions[1],gameoptions[2]);
 					else game=new Logic(makemaze.getMaze(),makemaze.getHero(),makemaze.getSword(),makemaze.getDragons(),3);
 
 					makemaze.reset();
@@ -106,21 +104,19 @@ public class GUIs extends JFrame {
 		btnExit.setBounds(416, 521, 89, 49);
 		contentPane.add(btnExit);
 
-
-		CLI.setScanner(gameoptions);
 		game=new Logic(-1,1,1);		
 		gamepanel = new ShowMaze(game.getMaze());
 
 		gamepanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				
+
 				//Reads keyboard input and converts to the corresponding 
 				//upper case string (if that's the case)
 				//String input=String.valueOf(e.getKeyChar());
 				char cmd=e.getKeyChar();
 				String input;
-				
+
 				if(cmd==up)
 					input="W";
 				else if(cmd==down)
@@ -132,22 +128,20 @@ public class GUIs extends JFrame {
 				else if(cmd==eagle)
 					input="V";
 				else return;
-				
+
 				int response=game.makePlay(input);
 
 				if(response==1) {
 					wonwindow.won(true);
 					wonwindow.setVisible(true);
 					gameoptions=optionwindow.getOptions();
-					CLI.setScanner(gameoptions);
-					game=new Logic(-1,1,1);
+					game=new Logic(gameoptions[0],gameoptions[1],gameoptions[2]);
 					gamepanel.updateStatus(game.getMaze());
 				} else if(response==-1) {					
 					wonwindow.won(false);
 					wonwindow.setVisible(true);
 					gameoptions=optionwindow.getOptions();
-					CLI.setScanner(gameoptions);
-					game=new Logic(-1,1,1);
+					game=new Logic(gameoptions[0],gameoptions[1],gameoptions[2]);
 					gamepanel.updateStatus(game.getMaze());
 				} else gamepanel.updateStatus(game.getMaze());
 			}
@@ -231,7 +225,7 @@ public class GUIs extends JFrame {
 		});
 		btnMakeMaze.setBounds(10, 547, 106, 23);
 		contentPane.add(btnMakeMaze);
-		
+
 		JButton btnNewButton_1 = new JButton("Choose commands");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -245,19 +239,19 @@ public class GUIs extends JFrame {
 		});
 		btnNewButton_1.setBounds(115, 547, 152, 23);
 		contentPane.add(btnNewButton_1);
-		
+
 		JButton btnNewButton_2 = new JButton("Update commands");
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
 				char []commands=commandwindow.getCmds();
-				
+
 				up=commands[0];
 				down=commands[1];
 				left=commands[2];
 				right=commands[3];
 				eagle=commands[4];
-				
+
 				gamepanel.requestFocusInWindow();
 			}
 		});

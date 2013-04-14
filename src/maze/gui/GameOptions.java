@@ -21,7 +21,7 @@ public class GameOptions extends JDialog {
 
 	private JPanel contentPanel = new JPanel();
 	JComboBox<String> comboBox;
-	private String gameoptions="P P 1";
+	private int []gameoptions={-1,1,1};
 	private JSlider mazeslider, dragonslider;
 
 	/**
@@ -37,7 +37,7 @@ public class GameOptions extends JDialog {
 		}
 	}
 
-	public String getOptions() {
+	public int[] getOptions() {
 		return gameoptions;
 	}
 	/**
@@ -110,41 +110,37 @@ public class GameOptions extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						String o;
 						if(tglbtnDefaultMaze.getModel().isSelected()) {
-							o="P ";
+							gameoptions[0]=-1;
+							gameoptions[1]=1;
 
 							switch(comboBox.getSelectedIndex()) {
 							case 0:
-								o+="A 1";
+								gameoptions[2]=2;
 								break;
 							case 1:
-								o+="P 1";
+								gameoptions[2]=1;
 								break;
 							case 2:
-								o+="D 1";
+								gameoptions[2]=3;
 								break;
 							}
 						}
 						else {
-							o="A ";
-							o+=mazeslider.getValue();
+							gameoptions[0]=mazeslider.getValue();
 							switch(comboBox.getSelectedIndex()) {
 							case 0:
-								o+=" A ";
+								gameoptions[2]=2;
 								break;
 							case 1:
-								o+=" P ";
+								gameoptions[2]=1;
 								break;
 							case 2:
-								o+=" D ";
+								gameoptions[2]=3;
 								break;
 							}
-							o+=dragonslider.getValue();
+							gameoptions[1]=dragonslider.getValue();
 						}
-
-
-						gameoptions=o;
 						setVisible(false);
 					}
 				});
