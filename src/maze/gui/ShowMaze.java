@@ -26,15 +26,15 @@ public class ShowMaze extends JPanel {
 
 	public ShowMaze(char[][] maze) {
 		try {                
-			wall = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\wall.jpg"));
-			dragon = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragon.png"));
-			sword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\sword.jpg"));
-			dragonasleep = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragonsleep.png"));
-			hero = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\hero.jpg"));
-			herosword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\herosword.gif"));
-			exit = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\exit.jpg"));
-			eagle = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\eagle.png"));
-			dragonsword = ImageIO.read(new File("C:\\Users\\Gabriel\\workspace\\Java\\dragonsword.png"));
+			wall = ImageIO.read(new File("wall.jpg"));
+			dragon = ImageIO.read(new File("dragon.png"));
+			sword = ImageIO.read(new File("sword.jpg"));
+			dragonasleep = ImageIO.read(new File("dragonsleep.png"));
+			hero = ImageIO.read(new File("hero.jpg"));
+			herosword = ImageIO.read(new File("herosword.gif"));
+			exit = ImageIO.read(new File("exit.jpg"));
+			eagle = ImageIO.read(new File("eagle.png"));
+			dragonsword = ImageIO.read(new File("dragonsword.png"));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
